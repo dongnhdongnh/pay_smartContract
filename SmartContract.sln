@@ -19,15 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.BlockchainBus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.SendMailBusiness", "SmartContract.SendMailBusiness\SmartContract.SendMailBusiness.csproj", "{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.ScanEthereum", "SmartContract.ScanEthereum\SmartContract.ScanEthereum.csproj", "{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.ScanEthereum", "SmartContract.ScanEthereum\SmartContract.ScanEthereum.csproj", "{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.SendEthereum", "SmartContract.SendEthereum\SmartContract.SendEthereum.csproj", "{BE92297D-1DF9-4209-8120-3C69E490FD76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.SendEthereum", "SmartContract.SendEthereum\SmartContract.SendEthereum.csproj", "{BE92297D-1DF9-4209-8120-3C69E490FD76}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceProject", "ServiceProject", "{CC7C0CB3-F02E-4BDB-8565-34D0C0A6B0A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.CreateAddress", "SmartContract.CreateAddress\SmartContract.CreateAddress.csproj", "{3FC85030-1E6F-4848-9887-FDD30034DCE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.CreateAddress", "SmartContract.CreateAddress\SmartContract.CreateAddress.csproj", "{3FC85030-1E6F-4848-9887-FDD30034DCE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.AutoCreateAddress", "SmartContract.AutoCreateAddress\SmartContract.AutoCreateAddress.csproj", "{257759A6-7C4D-405E-AF26-06E9570DFE99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.AutoCreateAddress", "SmartContract.AutoCreateAddress\SmartContract.AutoCreateAddress.csproj", "{257759A6-7C4D-405E-AF26-06E9570DFE99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

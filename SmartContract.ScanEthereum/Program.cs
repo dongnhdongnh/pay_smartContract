@@ -42,12 +42,12 @@ namespace SmartContract.ScanEthereum
                     {
                         using (var ethereumDepoRepo = repoFactory.GetEthereumDepositeTransactionRepository(connection))
                         {
-                            var resultSend =
-                                ethereumBusiness
-                                    .ScanBlockAsync<models.Entities.ETH.EthereumTransaction.EthereumWithdrawTransaction, models.Entities.ETH.EthereumTransaction.EthereumDepositTransaction,
-                                        models.Entities.ETH.EthereumBlockResponse, EthereumTransactionResponse>(CryptoCurrency.ETH, walletBusiness,
-                                        ethereumRepo, ethereumDepoRepo, rpc);
-                            Console.WriteLine(JsonHelper.SerializeObject(resultSend.Result));
+                            //var resultSend =
+                            //    ethereumBusiness
+                            //        .ScanBlockAsync<models.Entities.ETH.EthereumTransaction.EthereumWithdrawTransaction, models.Entities.ETH.EthereumTransaction.EthereumDepositTransaction,
+                            //            models.Entities.ETH.EthereumBlockResponse, EthereumTransactionResponse>(CryptoCurrency.ETH, walletBusiness,
+                            //            ethereumRepo, ethereumDepoRepo, rpc);
+                            //Console.WriteLine(JsonHelper.SerializeObject(resultSend.Result));
 
 
                             Console.WriteLine("==========Scan Ethereum End==========");

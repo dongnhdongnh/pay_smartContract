@@ -7,3 +7,16 @@ D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\o
 D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.csproj.CoreCompileInputs.cache
 D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.AssemblyInfoInputs.cache
 D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.AssemblyInfo.cs
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\NLog.config
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\appsettings.json
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.deps.json
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.dll
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.pdb
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.BlockchainBusiness.pdb
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.Commons.pdb
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.models.pdb
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.Repositories.pdb
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.SendMailBusiness.pdb
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.csproj.CopyComplete
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.dll
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.pdb
