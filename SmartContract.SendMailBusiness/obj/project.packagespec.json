@@ -1,0 +1,58 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/huan/project/DnToken/SmartContract/SmartContract.SendMailBusiness/SmartContract.SendMailBusiness.csproj",
+    "projectName": "SmartContract.SendMailBusiness",
+    "projectPath": "/home/huan/project/DnToken/SmartContract/SmartContract.SendMailBusiness/SmartContract.SendMailBusiness.csproj",
+    "outputPath": "/home/huan/project/DnToken/SmartContract/SmartContract.SendMailBusiness/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.1"
+    ],
+    "frameworks": {
+      "netcoreapp2.1": {
+        "projectReferences": {
+          "/home/huan/project/DnToken/SmartContract/SmartContract.Repositories/SmartContract.Repositories.csproj": {
+            "projectPath": "/home/huan/project/DnToken/SmartContract/SmartContract.Repositories/SmartContract.Repositories.csproj"
+          },
+          "/home/huan/project/DnToken/SmartContract/SmartContract.models/SmartContract.models.csproj": {
+            "projectPath": "/home/huan/project/DnToken/SmartContract/SmartContract.models/SmartContract.models.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.0, )",
+          "autoReferenced": true
+        },
+        "NLog": {
+          "target": "Package",
+          "version": "[4.5.11, )"
+        },
+        "NLog.Config": {
+          "target": "Package",
+          "version": "[4.5.11, )"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="1.50.5" />
+      <PackageReference Include="MySql.Data" Version="8.0.13" />
+      <PackageReference Include="NLog" Version="4.5.11" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SmartContract.models\SmartContract.models.csproj" />
+    </ItemGroup>
+
+</Project>

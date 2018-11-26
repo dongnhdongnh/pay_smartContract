@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessProject", "BusinessProject", "{C70433AA-7DA5-4B46-9748-CA285F4E8267}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.EthereumBusiness", "SmartContract.EthereumBusiness\SmartContract.EthereumBusiness.csproj", "{EF44F98A-F380-4915-BB8E-8B149E004D95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShareProject", "ShareProject", "{2BFDEC68-30EA-4F81-A158-B86D2C7962A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.Commons", "SmartContract.Commons\SmartContract.Commons.csproj", "{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.models", "SmartContract.models\SmartContract.models.csproj", "{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.Repositories", "SmartContract.Repositories\SmartContract.Repositories.csproj", "{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.BlockchainBusiness", "SmartContract.BlockchainBusiness\SmartContract.BlockchainBusiness.csproj", "{F05FC20B-F038-4749-A3D5-6C693960D8D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.SendMailBusiness", "SmartContract.SendMailBusiness\SmartContract.SendMailBusiness.csproj", "{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF44F98A-F380-4915-BB8E-8B149E004D95} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+		{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B} = {2BFDEC68-30EA-4F81-A158-B86D2C7962A2}
+		{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0} = {2BFDEC68-30EA-4F81-A158-B86D2C7962A2}
+		{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6} = {2BFDEC68-30EA-4F81-A158-B86D2C7962A2}
+		{F05FC20B-F038-4749-A3D5-6C693960D8D1} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF44F98A-F380-4915-BB8E-8B149E004D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF44F98A-F380-4915-BB8E-8B149E004D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF44F98A-F380-4915-BB8E-8B149E004D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF44F98A-F380-4915-BB8E-8B149E004D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05FC20B-F038-4749-A3D5-6C693960D8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05FC20B-F038-4749-A3D5-6C693960D8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05FC20B-F038-4749-A3D5-6C693960D8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05FC20B-F038-4749-A3D5-6C693960D8D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

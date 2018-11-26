@@ -1,0 +1,59 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/huan/project/DnToken/SmartContract/SmartContract.Repositories/SmartContract.Repositories.csproj",
+    "projectName": "SmartContract.Repositories",
+    "projectPath": "/home/huan/project/DnToken/SmartContract/SmartContract.Repositories/SmartContract.Repositories.csproj",
+    "outputPath": "/home/huan/project/DnToken/SmartContract/SmartContract.Repositories/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.1"
+    ],
+    "frameworks": {
+      "netcoreapp2.1": {
+        "projectReferences": {
+          "/home/huan/project/DnToken/SmartContract/SmartContract.models/SmartContract.models.csproj": {
+            "projectPath": "/home/huan/project/DnToken/SmartContract/SmartContract.models/SmartContract.models.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.1": {
+      "dependencies": {
+        "Dapper": {
+          "target": "Package",
+          "version": "[1.50.5, )"
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.0, )",
+          "autoReferenced": true
+        },
+        "MySql.Data": {
+          "target": "Package",
+          "version": "[8.0.13, )"
+        },
+        "NLog": {
+          "target": "Package",
+          "version": "[4.5.11, )"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}

@@ -1,0 +1,67 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/huan/project/DnToken/SmartContract/SmartContract.Commons/SmartContract.Commons.csproj",
+    "projectName": "SmartContract.Commons",
+    "projectPath": "/home/huan/project/DnToken/SmartContract/SmartContract.Commons/SmartContract.Commons.csproj",
+    "outputPath": "/home/huan/project/DnToken/SmartContract/SmartContract.Commons/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.1"
+    ],
+    "frameworks": {
+      "netcoreapp2.1": {
+        "projectReferences": {}
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.1": {
+      "dependencies": {
+        "BouncyCastle.NetCore": {
+          "target": "Package",
+          "version": "[1.8.3, )"
+        },
+        "Microsoft.Extensions.Configuration": {
+          "target": "Package",
+          "version": "[2.2.0-preview3-35497, )"
+        },
+        "Microsoft.Extensions.Configuration.Abstractions": {
+          "target": "Package",
+          "version": "[2.2.0-preview3-35497, )"
+        },
+        "Microsoft.Extensions.Configuration.Json": {
+          "target": "Package",
+          "version": "[2.2.0-preview3-35497, )"
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.0, )",
+          "autoReferenced": true
+        },
+        "Newtonsoft.Json": {
+          "target": "Package",
+          "version": "[11.0.2, )"
+        },
+        "StackExchange.Redis": {
+          "target": "Package",
+          "version": "[2.0.513, )"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2018.2/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2018.2/system/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_SmartContract.1999351351.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/nlog.config/4.5.11/contentFiles/any/any/NLog.config" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="BusinessProject" t="Include" />
+      <e p="ShareProject" t="Include" />
+      <e p="SmartContract.BlockchainBusiness" t="IncludeRecursive">
+        <e p="Base" t="Include">
+          <e p="AbsBlockchainBusiness.cs" t="Include" />
+        </e>
+        <e p="IBlockchainRpc.cs" t="Include" />
+        <e p="SmartContract.BlockchainBusiness.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="SmartContract.BlockchainBusiness.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SmartContract.Commons" t="IncludeRecursive">
+        <e p="Constants" t="Include">
+          <e p="CryptoCurrency.cs" t="Include" />
+          <e p="RedisCacheKey.cs" t="Include" />
+          <e p="Setting.cs" t="Include" />
+          <e p="Status.cs" t="Include" />
+        </e>
+        <e p="Helpers" t="Include">
+          <e p="AppSettingHelper.cs" t="Include" />
+          <e p="CacheHelper.cs" t="Include" />
+          <e p="CommonHelper.cs" t="Include" />
+          <e p="JsonHelper.cs" t="Include" />
+          <e p="SqlHelper.cs" t="Include" />
+          <e p="UnixTimestamp.cs" t="Include" />
+        </e>
+        <e p="SmartContract.Commons.csproj" t="IncludeRecursive" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="SmartContract.Commons.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SmartContract.EthereumBusiness" t="IncludeRecursive">
+        <e p="EthereumBusiness.cs" t="Include" />
+        <e p="EthereumRpc.cs" t="Include" />
+        <e p="EthereumRpcList.cs" t="Include" />
+        <e p="SmartContract.EthereumBusiness.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="SmartContract.EthereumBusiness.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SmartContract.Repositories" t="IncludeRecursive">
+        <e p="Mysql" t="Include">
+          <e p="Base" t="Include">
+            <e p="BlockchainTransactionRepository.cs" t="Include" />
+            <e p="MultiThreadUpdateEntityRepository.cs" t="Include" />
+            <e p="MySqlBaseRepository.cs" t="Include" />
+            <e p="MysqlBaseConnection.cs" t="Include" />
+          </e>
+          <e p="EthereumDepositTransactionRepository.cs" t="Include" />
+          <e p="EthereumWithdrawnTransactionRepository.cs" t="Include" />
+          <e p="InternalTransactionsRepository.cs" t="Include" />
+          <e p="Lib" t="Include">
+            <e p="SimpleCRUD.cs" t="Include" />
+          </e>
+          <e p="SendEmailRepository.cs" t="Include" />
+          <e p="SmartContractRepositoryMysqlPersistenceFactory.cs" t="Include" />
+          <e p="UserRepository.cs" t="Include" />
+        </e>
+        <e p="SmartContract.Repositories.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="SmartContract.Repositories.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SmartContract.SendMailBusiness" t="IncludeRecursive">
+        <e p="SendMailBusiness.cs" t="Include" />
+        <e p="SmartContract.SendMailBusiness.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="SmartContract.SendMailBusiness.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SmartContract.models" t="IncludeRecursive">
+        <e p="Domains" t="Include">
+          <e p="BaseModel.cs" t="Include" />
+          <e p="BlockchainAddress.cs" t="Include" />
+          <e p="BlockchainTransaction.cs" t="Include" />
+          <e p="EmailConfig.cs" t="Include" />
+          <e p="MultiThreadUpdateModel.cs" t="Include" />
+          <e p="ReturnObject.cs" t="Include" />
+        </e>
+        <e p="Entities" t="Include">
+          <e p="BTC" t="Include">
+            <e p="BitcoinAddress.cs" t="Include" />
+            <e p="BitcoinTransaction.cs" t="Include" />
+          </e>
+          <e p="ETH" t="Include">
+            <e p="ETHTypes.cs" t="Include" />
+            <e p="EthRpcJson.cs" t="Include" />
+            <e p="EthereumAddress.cs" t="Include" />
+            <e p="EthereumTransaction.cs" t="Include" />
+          </e>
+          <e p="EmailQueue.cs" t="Include" />
+          <e p="InternalWithdrawTransaction.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+          <e p="VAKA" t="Include">
+            <e p="VakacoinAccount.cs" t="Include" />
+            <e p="VakacoinTransaction.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="Base" t="Include">
+            <e p="IAddressRepository.cs" t="Include" />
+            <e p="IMultiThreadUpdateEntityRepository.cs" t="Include" />
+            <e p="IRepositoryBase.cs" t="Include" />
+            <e p="IRepositoryBlockchainTransaction.cs" t="Include" />
+            <e p="IRepositoryTransaction.cs" t="Include" />
+          </e>
+          <e p="IEthereumDepositTransactionRepository.cs" t="Include" />
+          <e p="IEthereumWithdrawTransactionRepository.cs" t="Include" />
+          <e p="IInternalTransactionRepository.cs" t="Include" />
+          <e p="ISendEmailRepository.cs" t="Include" />
+          <e p="ISmartContractRepositoryFactory.cs" t="Include" />
+          <e p="IUserRepository.cs" t="Include" />
+          <e p="RepositoryConfiguration.cs" t="Include" />
+        </e>
+        <e p="SmartContract.models.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="SmartContract.models.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SmartContract.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

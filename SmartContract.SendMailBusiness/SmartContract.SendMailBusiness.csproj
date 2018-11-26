@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SmartContract.models\SmartContract.models.csproj" />
+      <ProjectReference Include="..\SmartContract.Repositories\SmartContract.Repositories.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NLog" Version="4.5.11" />
+      <PackageReference Include="NLog.Config" Version="4.5.11" />
+    </ItemGroup>
+
+</Project>
