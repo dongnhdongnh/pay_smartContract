@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SmartContract.Commons\SmartContract.Commons.csproj" />
+    <ProjectReference Include="..\SmartContract.EthereumBusiness\SmartContract.EthereumBusiness.csproj" />
+    <ProjectReference Include="..\SmartContract.models\SmartContract.models.csproj" />
+  </ItemGroup>
+
 </Project>

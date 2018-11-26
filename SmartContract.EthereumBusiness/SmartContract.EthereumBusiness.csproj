@@ -5,6 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Nethereum.Portable" Version="2.5.1" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\SmartContract.BlockchainBusiness\SmartContract.BlockchainBusiness.csproj" />
       <ProjectReference Include="..\SmartContract.Commons\SmartContract.Commons.csproj" />
       <ProjectReference Include="..\SmartContract.models\SmartContract.models.csproj" />
