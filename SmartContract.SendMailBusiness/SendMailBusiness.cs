@@ -399,7 +399,7 @@ namespace SmartContract.SendMailBusiness
                     using (var userRepository = new UserRepository(_connectionDb))
                     {
                         var user = userRepository.FindById(transaction.ReceiverUserId);
-                        return user.Id;
+                        return user.mem_id;
                     }
                 }
             }
@@ -489,7 +489,7 @@ namespace SmartContract.SendMailBusiness
                         var transaction = internalTransactionsRepository.FindById(emailQueue.TransactionId);
 
                         var user = userRepository.FindById(transaction.SenderUserId);
-                        return user.Id;
+                        return user.mem_id;
                     }
                 }
             }

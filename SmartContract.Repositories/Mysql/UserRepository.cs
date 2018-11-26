@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
+using SmartContract.Commons.Constants;
+using SmartContract.Commons.Helpers;
 using SmartContract.models.Domains;
 using SmartContract.models.Entities;
 using SmartContract.models.Repositories;
@@ -10,7 +12,7 @@ using SmartContract.Repositories.Mysql.Base;
 
 namespace SmartContract.Repositories.Mysql
 {
-    public class UserRepository : MultiThreadUpdateEntityRepository<User>, IUserRepository
+    public class UserRepository : MySqlBaseRepository<User>, IUserRepository
     {
         private IUserRepository _userRepositoryImplementation;
 
@@ -53,13 +55,32 @@ namespace SmartContract.Repositories.Mysql
             }
         }
 
+        public User FindByIdUser(string id)
+        {
+            try
+            {
+                if (Connection.State != ConnectionState.Open)
+                    Connection.Open();
+
+                var sQuery = "SELECT * FROM " + TableName + " WHERE mem_id = @ID";
+
+                var result = Connection.QuerySingleOrDefault<User>(sQuery, new {ID = id});
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         public string FindEmailBySendTransaction(BlockchainTransaction transaction)
         {
             try
             {
-                var user = FindById(transaction.UserId);
+                var user = FindByIdUser(transaction.UserId);
 
-                return user.Id;
+                return user.mem_id;
             }
             catch (Exception e)
             {
@@ -108,10 +129,11 @@ namespace SmartContract.Repositories.Mysql
                 throw;
             }
         }
-        
+
         public User FindUserAddressNull()
         {
-            string sqlText = " select * from member where  (mem_address IS NULL or mem_address = '') and IsProcessing = 0 and Status = 'pending'";
+            string sqlText =
+                " select * from member where  (mem_address IS NULL or mem_address = '') and IsProcessing = 0";
 
             try
             {
@@ -123,6 +145,7 @@ namespace SmartContract.Repositories.Mysql
                 if (Connection.Ping())
                 {
                     var user = Connection.QueryFirstOrDefault<User>(sqlText);
+
                     return user;
                 }
                 else
@@ -137,10 +160,78 @@ namespace SmartContract.Repositories.Mysql
                 throw e;
             }
         }
-        
-        public override Task<ReturnObject> SafeUpdate(User row)
+
+
+        public async Task<ReturnObject> LockForProcessUser(User row)
         {
-            return base.SafeUpdate(row, new[] {nameof(row.Status)});
+            //Console.WriteLine("LockForProcess");
+            int cache = row.Version;
+
+            var setQuery = new Dictionary<string, string>
+            {
+                {nameof(row.Version), (row.Version + 1).ToString()}, {nameof(row.IsProcessing), "1"}
+            };
+
+            var whereValue = new Dictionary<string, string>
+            {
+                {nameof(row.mem_id), row.mem_id},
+                {nameof(row.Version), row.Version.ToString()},
+                {
+                    nameof(row.IsProcessing), "0"
+                }
+            };
+
+            if (cache != row.Version)
+            {
+                Console.WriteLine("fucking error");
+            }
+
+            return ExecuteSql(SqlHelper.Query_Update(TableName, setQuery, whereValue));
+        }
+
+        public async Task<ReturnObject> ReleaseLock(User row)
+        {
+            //Console.WriteLine("ReleaseLock");
+            var setQuery = new Dictionary<string, string>
+            {
+                {nameof(row.Version), (row.Version + 1).ToString()}, {nameof(row.IsProcessing), "0"}
+            };
+            var whereValue = new Dictionary<string, string>
+            {
+                {nameof(row.mem_id), row.mem_id},
+                {nameof(row.Version), row.Version.ToString()},
+                {nameof(row.IsProcessing), "1"}
+            };
+
+            return ExecuteSql(SqlHelper.Query_Update(TableName, setQuery, whereValue));
+        }
+        
+        public ReturnObject UpdateUser(User objectUpdate)
+        {
+            try
+            {
+                if (Connection.State != ConnectionState.Open)
+                    Connection.Open();
+                var result = Connection.Update(objectUpdate);
+                var status = result > 0 ? Status.STATUS_SUCCESS : Status.STATUS_ERROR;
+                Logger.Debug(GetClassName() + " =>> update status: " + status);
+                return new ReturnObject
+                {
+                    Status = status,
+                    Message = status == Status.STATUS_ERROR ? "Cannot Update" : "Update Success",
+                    Data = ""
+                };
+            }
+            catch (Exception e)
+            {
+                Logger.Error(GetClassName() + " =>> update fail: " + e.Message);
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_ERROR,
+                    Message = "Cannot update: " + e.Message,
+                    Data = ""
+                };
+            }
         }
     }
 }

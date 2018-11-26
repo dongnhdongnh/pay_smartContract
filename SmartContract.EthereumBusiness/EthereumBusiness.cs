@@ -122,7 +122,7 @@ namespace SmartContract.EthereumBusiness
 
                     var userRepository = SmartContractRepositoryFactory.GetUserRepository(dbConnection);
 
-                    var userCheck = userRepository.FindById(userId);
+                    var userCheck = userRepository.FindByIdUser(userId);
 
                     if (userCheck == null)
                         return new ReturnObject
@@ -141,7 +141,7 @@ namespace SmartContract.EthereumBusiness
                     {
                         Status = Status.STATUS_SUCCESS,
                         Data = address,
-                        Message = "Can't update wallet " + userCheck.Id
+                        Message = "Can't update wallet " + userCheck.mem_id
                     };
                 }
             }
