@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using SmartContract.BlockchainBusiness;
@@ -100,6 +101,60 @@ namespace SmartContract.EthereumBusiness
             }
         }
 
+        /// <summary>
+        /// Created Address with optimistic lock
+        /// </summary>
+        /// <param name="rpcClass"></param>
+        /// <param name="walletId"></param>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public virtual ReturnObject CreateAddress(IBlockchainRpc rpcClass, string userId,
+            string other = "")
+        {
+            try
+            {
+                using (var dbConnection = SmartContractRepositoryFactory.GetDbConnection())
+                {
+                    if (dbConnection.State != ConnectionState.Open)
+                    {
+                        dbConnection.Open();
+                    }
+
+                    var userRepository = SmartContractRepositoryFactory.GetUserRepository(dbConnection);
+
+                    var userCheck = userRepository.FindById(userId);
+
+                    if (userCheck == null)
+                        return new ReturnObject
+                        {
+                            Status = Status.STATUS_ERROR,
+                            Message = "User Not Found"
+                        };
+
+                    var resultsRPC = rpcClass.CreateNewAddress(other);
+                    if (resultsRPC.Status == Status.STATUS_ERROR)
+                        return resultsRPC;
+
+                    var address = resultsRPC.Data;
+
+                    return new ReturnObject
+                    {
+                        Status = Status.STATUS_SUCCESS,
+                        Data = address,
+                        Message = "Can't update wallet " + userCheck.Id
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_ERROR,
+                    Message = e.Message
+                };
+            }
+        } 
+        
         public virtual async Task<ReturnObject> ScanBlockAsync<TWithDraw, TDeposit, TBlockResponse, TTransaction>(
             string networkName,
             IRepositoryBlockchainTransaction<TWithDraw> withdrawRepoQuery,

@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceProject", "ServicePr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.AutoAddress", "SmartContract.AutoAddress\SmartContract.AutoAddress.csproj", "{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.CreatAddress", "SmartContract.CreatAddress\SmartContract.CreatAddress.csproj", "{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,7 @@ Global
 		{F05FC20B-F038-4749-A3D5-6C693960D8D1} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
 		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D} = {F5646506-F827-48B8-988E-BD0E880918BF}
+		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EF44F98A-F380-4915-BB8E-8B149E004D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -63,5 +66,9 @@ Global
 		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

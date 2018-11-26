@@ -6,7 +6,7 @@ using SmartContract.models.Domains;
 namespace SmartContract.models.Entities
 {
     [Table("member")]
-    public class User
+    public class User : MultiThreadUpdateModel
     {
         [Column("mem_id")] public string Id { get; set; }
         [Column("mem_receive_email")] public string EmailReceive { get; set; }
@@ -30,6 +30,7 @@ namespace SmartContract.models.Entities
         [Column("mem_article_like")] public int ArticleLike { get; set; }
         [Column("ico_write_auth")] public int Auth { get; set; }
         [Column("mem_mileage")] public decimal DN { get; set; }
+        [Column("mem_address")] public string Address { get; set; }
        
         public static User FromJson(string json) =>
             JsonHelper.DeserializeObject<User>(json, JsonHelper.CONVERT_SETTINGS);

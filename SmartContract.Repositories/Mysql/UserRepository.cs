@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using Dapper;
 using SmartContract.models.Domains;
 using SmartContract.models.Entities;
@@ -9,7 +10,7 @@ using SmartContract.Repositories.Mysql.Base;
 
 namespace SmartContract.Repositories.Mysql
 {
-    public class UserRepository : MySqlBaseRepository<User>, IUserRepository
+    public class UserRepository : MultiThreadUpdateEntityRepository<User>, IUserRepository
     {
         private IUserRepository _userRepositoryImplementation;
 
@@ -106,6 +107,40 @@ namespace SmartContract.Repositories.Mysql
                 Logger.Error("UserRepository =>> FindByEmailAddress fail: " + e.Message);
                 throw;
             }
+        }
+        
+        public User FindUserAddressNull()
+        {
+            string sqlText = " select * from member where  (mem_address IS NULL or mem_address = '') and IsProcessing = 0 and Status = 'pending'";
+
+            try
+            {
+                if (Connection.State != ConnectionState.Open)
+                {
+                    Connection.Open();
+                }
+
+                if (Connection.Ping())
+                {
+                    var user = Connection.QueryFirstOrDefault<User>(sqlText);
+                    return user;
+                }
+                else
+                {
+                    Logger.Error("Connection to db not open");
+                    throw new Exception("Connection to db not open");
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Error when find wallet address is null" + e.Message);
+                throw e;
+            }
+        }
+        
+        public override Task<ReturnObject> SafeUpdate(User row)
+        {
+            return base.SafeUpdate(row, new[] {nameof(row.Status)});
         }
     }
 }
