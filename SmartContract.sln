@@ -1,20 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessProject", "BusinessProject", "{C70433AA-7DA5-4B46-9748-CA285F4E8267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.EthereumBusiness", "SmartContract.EthereumBusiness\SmartContract.EthereumBusiness.csproj", "{EF44F98A-F380-4915-BB8E-8B149E004D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.EthereumBusiness", "SmartContract.EthereumBusiness\SmartContract.EthereumBusiness.csproj", "{EF44F98A-F380-4915-BB8E-8B149E004D95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShareProject", "ShareProject", "{2BFDEC68-30EA-4F81-A158-B86D2C7962A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.Commons", "SmartContract.Commons\SmartContract.Commons.csproj", "{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.Commons", "SmartContract.Commons\SmartContract.Commons.csproj", "{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.models", "SmartContract.models\SmartContract.models.csproj", "{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.models", "SmartContract.models\SmartContract.models.csproj", "{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.Repositories", "SmartContract.Repositories\SmartContract.Repositories.csproj", "{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.Repositories", "SmartContract.Repositories\SmartContract.Repositories.csproj", "{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.BlockchainBusiness", "SmartContract.BlockchainBusiness\SmartContract.BlockchainBusiness.csproj", "{F05FC20B-F038-4749-A3D5-6C693960D8D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.BlockchainBusiness", "SmartContract.BlockchainBusiness\SmartContract.BlockchainBusiness.csproj", "{F05FC20B-F038-4749-A3D5-6C693960D8D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.SendMailBusiness", "SmartContract.SendMailBusiness\SmartContract.SendMailBusiness.csproj", "{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartContract.SendMailBusiness", "SmartContract.SendMailBusiness\SmartContract.SendMailBusiness.csproj", "{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.ScanEthereum", "SmartContract.ScanEthereum\SmartContract.ScanEthereum.csproj", "{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.SendEthereum", "SmartContract.SendEthereum\SmartContract.SendEthereum.csproj", "{BE92297D-1DF9-4209-8120-3C69E490FD76}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceProject", "ServiceProject", "{F5646506-F827-48B8-988E-BD0E880918BF}"
 EndProject
@@ -62,13 +69,29 @@ Global
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73CBC89A-E85E-4E58-8338-0B15E6D0E3B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE92297D-1DF9-4209-8120-3C69E490FD76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE92297D-1DF9-4209-8120-3C69E490FD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE92297D-1DF9-4209-8120-3C69E490FD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE92297D-1DF9-4209-8120-3C69E490FD76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF44F98A-F380-4915-BB8E-8B149E004D95} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+		{8CDCB1C2-D740-4E5E-A8B8-CD7D170E508B} = {2BFDEC68-30EA-4F81-A158-B86D2C7962A2}
+		{C1AA34B9-01CC-43A7-BD7A-3E9144A015E0} = {2BFDEC68-30EA-4F81-A158-B86D2C7962A2}
+		{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6} = {2BFDEC68-30EA-4F81-A158-B86D2C7962A2}
+		{F05FC20B-F038-4749-A3D5-6C693960D8D1} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+		{A4C1CB1A-9208-4BF1-9201-BD0D10835C5C} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+		{BE92297D-1DF9-4209-8120-3C69E490FD76} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3637A65-F931-493D-A631-E32DCA01446B}
 	EndGlobalSection
 EndGlobal

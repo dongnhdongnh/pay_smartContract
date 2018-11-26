@@ -4,11 +4,18 @@ using System.Net;
 using System.Net.Cache;
 using System.Numerics;
 using System.Threading.Tasks;
+using Nethereum.Hex.HexTypes;
+using Nethereum.Contracts.CQS;
+//using Nethereum.StandardTokenEIP20.CQS;
+using Nethereum.Web3.Accounts;
 using SmartContract.BlockchainBusiness;
 using SmartContract.Commons.Constants;
 using SmartContract.Commons.Helpers;
 using SmartContract.models.Domains;
 using SmartContract.models.Entities.ETH;
+using Nethereum.StandardTokenEIP20.CQS;
+using Nethereum.ENS;
+using Nethereum.RPC.Eth.DTOs;
 
 namespace SmartContract.EthereumBusiness
 {
@@ -43,7 +50,7 @@ namespace SmartContract.EthereumBusiness
                 // Set a default policy level for the "http:" and "https" schemes.
                 HttpRequestCachePolicy policy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
                 HttpWebRequest.DefaultCachePolicy = policy;
-                var httpWebRequest = (HttpWebRequest) WebRequest.Create(EndPointUrl);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(EndPointUrl);
                 // Define a cache policy for this request only. 
                 HttpRequestCachePolicy noCachePolicy =
                     new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
@@ -65,7 +72,7 @@ namespace SmartContract.EthereumBusiness
                 }
 
 
-                var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -106,12 +113,12 @@ namespace SmartContract.EthereumBusiness
                 {
                     From = from,
                     To = toAddress,
-                    Value = ((BigInteger) weiAmount).ToHex()
+                    Value = ((BigInteger)weiAmount).ToHex()
                 };
 
                 //var tx = { from: "0x391694e7e0b0cce554cb130d723a9d27458f9298", to: "0xafa3f8684e54059998bc3a7b0d2b0da075154d66", value: web3.toWei(1.23, "ether")};
                 var result = EthereumSendRPC(EthereumRpcList.RpcName.PersonalSendTransaction,
-                    new Object[] {sender, passphrase});
+                    new Object[] { sender, passphrase });
                 if (result.Status == Status.STATUS_ERROR)
                 {
                     return result;
@@ -141,7 +148,7 @@ namespace SmartContract.EthereumBusiness
 
         public static decimal WeiToEther(BigInteger amount)
         {
-            return ((decimal) amount) / 1000000000000000000;
+            return ((decimal)amount) / 1000000000000000000;
         }
 
         /// <summary>
@@ -157,16 +164,16 @@ namespace SmartContract.EthereumBusiness
             {
                 From = from,
                 To = toAddress,
-                Value = ((int) amount).IntToHex()
+                Value = ((int)amount).IntToHex()
             };
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthSendTransaction, new Object[] {sender});
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthSendTransaction, new Object[] { sender });
         }
 
 
         public ReturnObject FindTransactionByBlockNumberAndIndex(int blockNumber, int transactionIndex)
         {
             return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByBlockNumberAndIndex,
-                new Object[] {blockNumber.IntToHex(), transactionIndex.IntToHex()});
+                new Object[] { blockNumber.IntToHex(), transactionIndex.IntToHex() });
         }
 
 
@@ -175,7 +182,7 @@ namespace SmartContract.EthereumBusiness
             try
             {
                 ReturnObject result =
-                    EthereumSendRPC(EthereumRpcList.RpcName.PersonalNewAccount, new Object[] {password});
+                    EthereumSendRPC(EthereumRpcList.RpcName.PersonalNewAccount, new Object[] { password });
                 Console.WriteLine(result);
                 if (result.Status == Status.STATUS_ERROR)
                 {
@@ -251,12 +258,71 @@ namespace SmartContract.EthereumBusiness
             }
         }
 
+        public async Task<ReturnObject> SendTransactionAsync1(BlockchainTransaction blockchainTransaction)
+        {
+            try
+            {
+                // var senderAddress = AccountFactory.Address;
+                //  var web3 = _ethereumClientIntegrationFixture.GetWeb3();
+                var url = AppSettingHelper.GetEthereumNode();
+                var privateKey = "08786bec5c4b2ac8cb6dcafb320a3486d59a0e9f81860792fe13ca0a962cda3e";
+                var account = new Account(privateKey);
+                var web3 = new Nethereum.Web3.Web3(account, url);
+                //var deploymentMessage = new StandardTokenDeployment
+                //{
+                //    TotalSupply = 10000,
+                //    FromAddress = blockchainTransaction.FromAddress,
+                //    Gas = new HexBigInteger(900000)
+                //};
+
+                //  var deploymentHandler = web3.Eth.GetContractDeploymentHandler<StandardTokenDeployment>();
+                //   var transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deploymentMessage);
+
+                var contractAddress = "0xB06C9F6A829fAEd77F227629586C982c37B7b408";
+                var newAddress = "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe";
+
+
+
+                var transactionMessage = new TransferFunction
+                {
+                    FromAddress = blockchainTransaction.FromAddress,
+                    To = newAddress,
+                    AmountToSend = 1000
+                };
+
+                var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
+                var transferReceipt =
+                    await transferHandler.SendRequestAndWaitForReceiptAsync(transactionMessage, contractAddress);
+                //  var transferEventOutput = transferReceipt.
+                //   var transaction = await web3.Eth.Transactions.GetTransactionByHash.SendRequestAsync(transferReceipt.TransactionHash);
+                Console.WriteLine(JsonHelper.SerializeObject(transferReceipt));
+                //   var transferDecoded = transaction.DecodeTransactionToFunctionMessage<TransferFunction>();
+
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_COMPLETED,
+                    Message = ""
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_ERROR,
+                    Message = e.Message
+                };
+            }
+        }
+
+
+
         public ReturnObject GetBlockByNumber(int blockNumber)
         {
             try
             {
                 ReturnObject result = EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByNumber,
-                    new Object[] {blockNumber.IntToHex(), true});
+                    new Object[] { blockNumber.IntToHex(), true });
                 //Console.WriteLine(_result);
                 if (result.Status == Status.STATUS_ERROR)
                 {
@@ -292,7 +358,7 @@ namespace SmartContract.EthereumBusiness
 
         public ReturnObject FindTransactionByHash(string hash)
         {
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByHash, new Object[] {hash});
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByHash, new Object[] { hash });
         }
 
         public async Task<ReturnObject> FindTransactionByHashAsyn(string transactionHash)
@@ -302,13 +368,13 @@ namespace SmartContract.EthereumBusiness
 
         public ReturnObject FindBlockByHash(string hash)
         {
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByHash, new Object[] {hash, true});
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByHash, new Object[] { hash, true });
         }
 
         public ReturnObject FindBlockByNumber(int number)
         {
             return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByNumber,
-                new Object[] {number.IntToHex(), true});
+                new Object[] { number.IntToHex(), true });
             //return null;
         }
 

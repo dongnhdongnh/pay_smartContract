@@ -1,0 +1,9 @@
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.BlockchainBusiness.dll
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.Commons.dll
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.models.dll
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.Repositories.dll
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\bin\Debug\netcoreapp2.1\SmartContract.SendMailBusiness.dll
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.csprojAssemblyReference.cache
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.csproj.CoreCompileInputs.cache
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.AssemblyInfoInputs.cache
+D:\Projects\vakapay\newgit\DNCoin\SmartContract\SmartContract.EthereumBusiness\obj\Debug\netcoreapp2.1\SmartContract.EthereumBusiness.AssemblyInfo.cs
