@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.BlockchainBus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.SendMailBusiness", "SmartContract.SendMailBusiness\SmartContract.SendMailBusiness.csproj", "{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceProject", "ServiceProject", "{F5646506-F827-48B8-988E-BD0E880918BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract.AutoAddress", "SmartContract.AutoAddress\SmartContract.AutoAddress.csproj", "{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +32,7 @@ Global
 		{AA4874F1-94F7-46F5-AC2F-67BEAF1494A6} = {2BFDEC68-30EA-4F81-A158-B86D2C7962A2}
 		{F05FC20B-F038-4749-A3D5-6C693960D8D1} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD} = {C70433AA-7DA5-4B46-9748-CA285F4E8267}
+		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D} = {F5646506-F827-48B8-988E-BD0E880918BF}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EF44F98A-F380-4915-BB8E-8B149E004D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -54,5 +59,9 @@ Global
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEB4F81D-4C2B-4A3F-B106-FFFBD46570BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB0DF64-FB9D-4ACB-9734-0E729E56C57D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
