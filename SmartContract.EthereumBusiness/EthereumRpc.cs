@@ -264,12 +264,12 @@ namespace SmartContract.EthereumBusiness
                 var contractAddress = "0x8070f3cba5833490b8794e2b4894b59a45cbbba8";
                 var account = new Account(privateKey);
                 var web3 = new Web3(account, "https://ropsten.infura.io/v3/e2bd8adca45547c38efb10566fa7eec1");
-                var newAddress = "0x15118dB6ED8Fa2f461d62F395DC55C51c42f3488";
+                
                 var value = (BigInteger) EtherToWei(blockchainTransaction.Amount);
                 var transactionMessage = new TransferFunction()
                 {
                     FromAddress = senderAddress,
-                    To = newAddress,
+                    To = blockchainTransaction.ToAddress,
                     Value = value
                 };
 
