@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using SmartContract.Commons.Constants;
 
@@ -60,6 +62,18 @@ namespace SmartContract.Commons.Helpers
         public static string GetEthereumNode()
         {
             return GetNodeSetting(CryptoCurrency.ETH);
+        }
+        public static string GetSmartContractAbi()
+        {
+            string contents = File.ReadAllText(@"DN.Abi");
+            Regex.Replace(contents, @"\t|\n|\r", "");
+            contents.Replace("\"", "'");
+            return contents;
+        }
+        public static string GetSmartContractAddress()
+        {
+
+            return "0x970de7a6ab0e062c5cfae6d342887b5eac1a3552";
         }
 
         public static string GetRedisConfig()

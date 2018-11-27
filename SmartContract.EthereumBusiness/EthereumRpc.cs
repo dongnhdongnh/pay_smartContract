@@ -53,7 +53,7 @@ namespace SmartContract.EthereumBusiness
                 // Set a default policy level for the "http:" and "https" schemes.
                 HttpRequestCachePolicy policy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
                 HttpWebRequest.DefaultCachePolicy = policy;
-                var httpWebRequest = (HttpWebRequest) WebRequest.Create(EndPointUrl);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(EndPointUrl);
                 // Define a cache policy for this request only. 
                 HttpRequestCachePolicy noCachePolicy =
                     new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
@@ -75,7 +75,7 @@ namespace SmartContract.EthereumBusiness
                 }
 
 
-                var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -116,12 +116,12 @@ namespace SmartContract.EthereumBusiness
                 {
                     From = from,
                     To = toAddress,
-                    Value = ((BigInteger) weiAmount).ToHex()
+                    Value = ((BigInteger)weiAmount).ToHex()
                 };
 
                 //var tx = { from: "0x391694e7e0b0cce554cb130d723a9d27458f9298", to: "0xafa3f8684e54059998bc3a7b0d2b0da075154d66", value: web3.toWei(1.23, "ether")};
                 var result = EthereumSendRPC(EthereumRpcList.RpcName.PersonalSendTransaction,
-                    new Object[] {sender, passphrase});
+                    new Object[] { sender, passphrase });
                 if (result.Status == Status.STATUS_ERROR)
                 {
                     return result;
@@ -151,7 +151,7 @@ namespace SmartContract.EthereumBusiness
 
         public static decimal WeiToEther(BigInteger amount)
         {
-            return ((decimal) amount) / 1000000000000000000;
+            return ((decimal)amount) / 1000000000000000000;
         }
 
         /// <summary>
@@ -167,16 +167,16 @@ namespace SmartContract.EthereumBusiness
             {
                 From = from,
                 To = toAddress,
-                Value = ((int) amount).IntToHex()
+                Value = ((int)amount).IntToHex()
             };
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthSendTransaction, new Object[] {sender});
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthSendTransaction, new Object[] { sender });
         }
 
 
         public ReturnObject FindTransactionByBlockNumberAndIndex(int blockNumber, int transactionIndex)
         {
             return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByBlockNumberAndIndex,
-                new Object[] {blockNumber.IntToHex(), transactionIndex.IntToHex()});
+                new Object[] { blockNumber.IntToHex(), transactionIndex.IntToHex() });
         }
 
 
@@ -264,8 +264,8 @@ namespace SmartContract.EthereumBusiness
                 var contractAddress = "0x8070f3cba5833490b8794e2b4894b59a45cbbba8";
                 var account = new Account(privateKey);
                 var web3 = new Web3(account, "https://ropsten.infura.io/v3/e2bd8adca45547c38efb10566fa7eec1");
-                
-                var value = (BigInteger) EtherToWei(blockchainTransaction.Amount);
+
+                var value = (BigInteger)EtherToWei(blockchainTransaction.Amount);
                 var transactionMessage = new TransferFunction()
                 {
                     FromAddress = senderAddress,
@@ -294,6 +294,33 @@ namespace SmartContract.EthereumBusiness
                 };
             }
         }
+        public async Task<ReturnObject> TestSmartContractFunction()
+        {
+
+            try
+            {
+                string abi = AppSettingHelper.GetSmartContractAbi();
+                Nethereum.Contracts.Contract contract = Web3Api.GetContract(abi, AppSettingHelper.GetSmartContractAddress());
+                Function funct = Web3Api.getFunction(contract, "balances");
+                var result = await funct.CallAsync<BigInteger>("0xc942F1D286d9b8002206CbB3196f46Fa892aAD93");
+                Console.WriteLine(result);
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_COMPLETED,
+
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_ERROR,
+                    Message = e.Message
+                };
+            }
+        }
+
 
         public static async Task<TransactionReceipt> MineAndGetReceiptAsync(Web3 web3, string transactionHash)
         {
@@ -313,7 +340,7 @@ namespace SmartContract.EthereumBusiness
             try
             {
                 ReturnObject result = EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByNumber,
-                    new Object[] {blockNumber.IntToHex(), true});
+                    new Object[] { blockNumber.IntToHex(), true });
                 //Console.WriteLine(_result);
                 if (result.Status == Status.STATUS_ERROR)
                 {
@@ -349,7 +376,7 @@ namespace SmartContract.EthereumBusiness
 
         public ReturnObject FindTransactionByHash(string hash)
         {
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByHash, new Object[] {hash});
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByHash, new Object[] { hash });
         }
 
         public async Task<ReturnObject> FindTransactionByHashAsyn(string transactionHash)
@@ -359,13 +386,13 @@ namespace SmartContract.EthereumBusiness
 
         public ReturnObject FindBlockByHash(string hash)
         {
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByHash, new Object[] {hash, true});
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByHash, new Object[] { hash, true });
         }
 
         public ReturnObject FindBlockByNumber(int number)
         {
             return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByNumber,
-                new Object[] {number.IntToHex(), true});
+                new Object[] { number.IntToHex(), true });
             //return null;
         }
 
@@ -412,4 +439,7 @@ namespace SmartContract.EthereumBusiness
             //return 
         }
     }
+
+
+
 }

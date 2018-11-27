@@ -12,7 +12,7 @@ namespace ConsoleApp1
             try
             {
                 EthereumRpc ethe = new EthereumRpc("");
-                ethe.SendTransactionAsync1(null).Wait();
+                ethe.TestSmartContractFunction().Wait();
                 // var T = await ethe.SendTransactionAsync1(null);
                 //T.Wait();
                 // await Task.Delay(1000);
