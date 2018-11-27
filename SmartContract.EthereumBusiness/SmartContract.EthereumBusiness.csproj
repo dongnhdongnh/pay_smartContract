@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Common.Logging.Core" Version="3.4.1" />
       <PackageReference Include="Nethereum.Portable" Version="2.5.1" />
     </ItemGroup>
 

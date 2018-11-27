@@ -1317,10 +1317,12 @@
       ]
     },
     "System.Buffers/4.4.0": {
-      "sha512": "AwarXzzoDwX6BgrhjoJsk6tUezZEozOT5Y9QKF94Gl4JK91I4PIIBkBco9068Y9/Dra8Dkbie99kXB8+1BaYKw==",
+      "sha512": "VCJfpWcYG1gT3WwivZWgT0KaqY678MQBvrOI2si6V8GHeQOtuW+wpiv5ss4KyfGG+cFFdPNaI+nw2/kExCtGgQ==",
       "type": "package",
       "path": "system.buffers/4.4.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netcoreapp2.0/_._",
@@ -1793,10 +1795,11 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "qUJMNWhbm9oZ3XaMFiEMiYmRPszbnXIkRIi7+4b2Md2xZ6JUOepf0/kY3S85qistRohl9OdMe4PsO+RdG2kTIQ==",
+      "sha512": "x/3d5xb+mc9e4I2GOOT+HPRWMZLbYjNN/kYKsb0fyUKcWizn/t1CIrGRLIBhv7H0ptYEt+WTTztdPmwSUMyKig==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -2124,23 +2127,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {},
+    "C:\\Users\\DongNguyen\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.models\\SmartContract.models.csproj",
+      "projectUniqueName": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.models\\SmartContract.models.csproj",
       "projectName": "SmartContract.models",
-      "projectPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.models\\SmartContract.models.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.models\\obj\\",
+      "projectPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.models\\SmartContract.models.csproj",
+      "packagesPath": "C:\\Users\\DongNguyen\\.nuget\\packages\\",
+      "outputPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DongNguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2153,8 +2156,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj": {
-              "projectPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj"
+            "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj": {
+              "projectPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj"
             }
           }
         }

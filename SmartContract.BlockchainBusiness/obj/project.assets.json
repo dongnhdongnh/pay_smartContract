@@ -1697,10 +1697,12 @@
       ]
     },
     "System.Buffers/4.4.0": {
-      "sha512": "AwarXzzoDwX6BgrhjoJsk6tUezZEozOT5Y9QKF94Gl4JK91I4PIIBkBco9068Y9/Dra8Dkbie99kXB8+1BaYKw==",
+      "sha512": "VCJfpWcYG1gT3WwivZWgT0KaqY678MQBvrOI2si6V8GHeQOtuW+wpiv5ss4KyfGG+cFFdPNaI+nw2/kExCtGgQ==",
       "type": "package",
       "path": "system.buffers/4.4.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netcoreapp2.0/_._",
@@ -2335,10 +2337,11 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "qUJMNWhbm9oZ3XaMFiEMiYmRPszbnXIkRIi7+4b2Md2xZ6JUOepf0/kY3S85qistRohl9OdMe4PsO+RdG2kTIQ==",
+      "sha512": "x/3d5xb+mc9e4I2GOOT+HPRWMZLbYjNN/kYKsb0fyUKcWizn/t1CIrGRLIBhv7H0ptYEt+WTTztdPmwSUMyKig==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -2568,10 +2571,12 @@
       ]
     },
     "System.Text.Encoding.CodePages/4.4.0": {
-      "sha512": "6JX7ZdaceBiLKLkYt8zJcp4xTJd1uYyXXEkPw6mnlUIjh1gZPIVKPtRXPmY5kLf6DwZmf5YLwR3QUrRonl7l0A==",
+      "sha512": "epF1P00AFbqPy5jZx3fpEn5qwlBDZ+dck71xYc/jLibfY6BtoFKOqoj84YHcQWV9HcWb7M13aVJ61XCdK8/3XA==",
       "type": "package",
       "path": "system.text.encoding.codepages/4.4.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/MonoAndroid10/_._",
@@ -2729,23 +2734,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {},
+    "C:\\Users\\DongNguyen\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.BlockchainBusiness\\SmartContract.BlockchainBusiness.csproj",
+      "projectUniqueName": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.BlockchainBusiness\\SmartContract.BlockchainBusiness.csproj",
       "projectName": "SmartContract.BlockchainBusiness",
-      "projectPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.BlockchainBusiness\\SmartContract.BlockchainBusiness.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.BlockchainBusiness\\obj\\",
+      "projectPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.BlockchainBusiness\\SmartContract.BlockchainBusiness.csproj",
+      "packagesPath": "C:\\Users\\DongNguyen\\.nuget\\packages\\",
+      "outputPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.BlockchainBusiness\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DongNguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2758,14 +2763,14 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj": {
-              "projectPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj"
+            "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj": {
+              "projectPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.Commons\\SmartContract.Commons.csproj"
             },
-            "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.models\\SmartContract.models.csproj": {
-              "projectPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.models\\SmartContract.models.csproj"
+            "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.models\\SmartContract.models.csproj": {
+              "projectPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.models\\SmartContract.models.csproj"
             },
-            "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.SendMailBusiness\\SmartContract.SendMailBusiness.csproj": {
-              "projectPath": "D:\\Projects\\vakapay\\newgit\\DNCoin\\SmartContract\\SmartContract.SendMailBusiness\\SmartContract.SendMailBusiness.csproj"
+            "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.SendMailBusiness\\SmartContract.SendMailBusiness.csproj": {
+              "projectPath": "G:\\Work\\Vaka\\Vakagroup\\smartContract\\SmartContract\\SmartContract.SendMailBusiness\\SmartContract.SendMailBusiness.csproj"
             }
           }
         }
