@@ -64,7 +64,25 @@ namespace SmartContract.Repositories.Mysql
 
                 var sQuery = "SELECT * FROM " + TableName + " WHERE mem_id = @ID";
 
-                var result = Connection.QuerySingleOrDefault<User>(sQuery, new {ID = id});
+                var result = Connection.QuerySingleOrDefault<User>(sQuery, new { ID = id });
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        public User FindByAddress(string address)
+        {
+            try
+            {
+                if (Connection.State != ConnectionState.Open)
+                    Connection.Open();
+
+                var sQuery = "SELECT * FROM " + TableName + " WHERE mem_address = @add";
+
+                var result = Connection.QuerySingleOrDefault<User>(sQuery, new { add = address });
 
                 return result;
             }
@@ -99,7 +117,7 @@ namespace SmartContract.Repositories.Mysql
 
                 var sQuery = $"SELECT * FROM {TableName} WHERE mem_id = @Email";
 
-                var result = Connection.QuerySingleOrDefault<User>(sQuery, new {Email = emailAddress});
+                var result = Connection.QuerySingleOrDefault<User>(sQuery, new { Email = emailAddress });
 
                 return result;
             }
@@ -121,7 +139,7 @@ namespace SmartContract.Repositories.Mysql
 
                 var result = Connection.Query<User>(sQuery);
 
-                return (List<User>) result;
+                return (List<User>)result;
             }
             catch (Exception e)
             {
@@ -205,7 +223,7 @@ namespace SmartContract.Repositories.Mysql
 
             return ExecuteSql(SqlHelper.Query_Update(TableName, setQuery, whereValue));
         }
-        
+
         public ReturnObject UpdateUser(User objectUpdate)
         {
             try

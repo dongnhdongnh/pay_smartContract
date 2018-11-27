@@ -14,6 +14,7 @@ namespace SmartContract.models.Repositories
         User FindWhere(string sql);
         string FindEmailBySendTransaction(BlockchainTransaction transaction);
         User FindByEmailAddress(string emailAddress);
+        User FindByAddress(string address);
         User FindUserAddressNull();
         Task<ReturnObject> LockForProcessUser(User row);
         User FindByIdUser(string id);

@@ -25,10 +25,10 @@ namespace SmartContract.ScanEthereum
 
         private static void RunScan(RepositoryConfiguration repositoryConfig)
         {
-           var repoFactory = new SmartContractRepositoryMysqlPersistenceFactory(repositoryConfig);
+            var repoFactory = new SmartContractRepositoryMysqlPersistenceFactory(repositoryConfig);
 
             var ethereumBusiness = new EthereumBusiness.EthereumBusiness(repoFactory);
-      //      var walletBusiness = new WalletBusiness.WalletBusiness(repoFactory);
+            //      var walletBusiness = new WalletBusiness.WalletBusiness(repoFactory);
             var connection = repoFactory.GetOldConnection() ?? repoFactory.GetDbConnection();
             try
             {
@@ -37,17 +37,17 @@ namespace SmartContract.ScanEthereum
                     Console.WriteLine("==========Start Scan Ethereum==========");
 
                     var rpc = new EthereumRpc(AppSettingHelper.GetEthereumNode());
-
+                    var _re = rpc.FindTransactionByHash("0x1ed65fc78c3bf3a8d7cf07ee5e632b274c56df0b777d5903d04952b4ef3c9591");
                     using (var ethereumRepo = repoFactory.GetEthereumWithdrawTransactionRepository(connection))
                     {
                         using (var ethereumDepoRepo = repoFactory.GetEthereumDepositeTransactionRepository(connection))
                         {
-                            //var resultSend =
-                            //    ethereumBusiness
-                            //        .ScanBlockAsync<models.Entities.ETH.EthereumTransaction.EthereumWithdrawTransaction, models.Entities.ETH.EthereumTransaction.EthereumDepositTransaction,
-                            //            models.Entities.ETH.EthereumBlockResponse, EthereumTransactionResponse>(CryptoCurrency.ETH, walletBusiness,
-                            //            ethereumRepo, ethereumDepoRepo, rpc);
-                            //Console.WriteLine(JsonHelper.SerializeObject(resultSend.Result));
+                            var resultSend =
+                                ethereumBusiness
+                                    .ScanBlockAsync<models.Entities.ETH.EthereumTransaction.EthereumWithdrawTransaction, models.Entities.ETH.EthereumTransaction.EthereumDepositTransaction,
+                                        models.Entities.ETH.EthereumBlockResponse, EthereumTransactionResponse>(CryptoCurrency.ETH,
+                                        ethereumRepo, ethereumDepoRepo, rpc);
+                            Console.WriteLine(JsonHelper.SerializeObject(resultSend.Result));
 
 
                             Console.WriteLine("==========Scan Ethereum End==========");

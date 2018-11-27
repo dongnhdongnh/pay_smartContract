@@ -28,7 +28,15 @@ namespace SmartContract.EthereumBusiness
                 return _web3;
             }
         }
+        public static void DecodeInput(string input, Nethereum.Contracts.Contract contracts)
+        {
+            //mWeb3.Eth.
+            //Nethereum.ABI.FunctionEncoding.ParameterDecoder dec = new Nethereum.ABI.FunctionEncoding.ParameterDecoder();
+            //dec.DecodeDefaultData(input,);
+       //   = new Nethereum.Contracts.Contract();
 
+
+        }
         public static async Task<bool> UnlockAccount(string accountPublicKey, string accountPassword, ulong accountUnlockTime)
         {
             bool unlockResult = await mWeb3.Personal.UnlockAccount.SendRequestAsync(accountPublicKey, accountPassword, accountUnlockTime);
