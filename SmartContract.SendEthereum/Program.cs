@@ -63,7 +63,7 @@ namespace SmartContract.SendEthereum
 
 
                         Console.WriteLine("Send Ethereum End...");
-                        Thread.Sleep(1000);
+                        Thread.Sleep(5000);
                     }
                 }
             }

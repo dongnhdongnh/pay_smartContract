@@ -115,16 +115,16 @@ namespace SmartContract.BlockchainBusiness.Base
                 //create database email when send success
                 if (sendTransaction.Status == Status.STATUS_COMPLETED)
                 {
-                    var email = GetEmailByTransaction(pendingTransaction);
-                    if (email != null)
-                    {
-                        
-                        await SendMailBusiness.SendMailBusiness.CreateDataEmail(
-                            "Notify send " + pendingTransaction.NetworkName(),
-                            email, pendingTransaction.Amount, pendingTransaction.Id,
-                            EmailTemplate.Sent, pendingTransaction.NetworkName(), SmartContractRepositoryFactory,
-                            false);
-                    }
+//                    var email = GetEmailByTransaction(pendingTransaction);
+//                    if (email != null)
+//                    {
+//                        
+//                        await SendMailBusiness.SendMailBusiness.CreateDataEmail(
+//                            "Notify send " + pendingTransaction.NetworkName(),
+//                            email, pendingTransaction.Amount, pendingTransaction.Id,
+//                            EmailTemplate.Sent, pendingTransaction.NetworkName(), SmartContractRepositoryFactory,
+//                            false);
+//                    }
                 }
 
                 var result = await repoQuery.SafeUpdate(pendingTransaction);
@@ -149,6 +149,7 @@ namespace SmartContract.BlockchainBusiness.Base
             catch (Exception e)
             {
                 //release lock
+                Console.WriteLine(e.Message);
                 transactionDbSend.Rollback();
                 var resultRelease = repoQuery.ReleaseLock(pendingTransaction);
                 Console.WriteLine(JsonHelper.SerializeObject(resultRelease));
