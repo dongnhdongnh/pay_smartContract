@@ -106,7 +106,7 @@ namespace SmartContract.BlockchainBusiness.Base
             {
                 //Call RPC Transaction
                 //TODO EDIT RPC Class
-                var sendTransaction = await rpcClass.SendTransactionAsync(pendingTransaction);
+                var sendTransaction = await rpcClass.SendTransactionAsync1(pendingTransaction);
                 pendingTransaction.Status = sendTransaction.Status;
                 pendingTransaction.IsProcessing = 0;
                 

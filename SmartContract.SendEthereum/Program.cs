@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using SmartContract.models.Domains;
+using SmartContract.models.Entities;
 
 namespace SmartContract.SendEthereum
 {
@@ -21,10 +24,12 @@ namespace SmartContract.SendEthereum
                 {
                     ConnectionString = AppSettingHelper.GetDbConnection()
                 };
-                string rootAddress = "0x12890d2cce102216644c59dae5baed380d84830c";
-                string rootPassword = "password";
+                string rootAddress = "0x15118dB6ED8Fa2f461d62F395DC55C51c42f3488";
+                string rootPassword = "Huan@123";
                 EthereumRpc.SetAdminAddressPassword(rootAddress, rootPassword);
-                for (var i = 0; i < 10; i++)
+
+
+                for (var i = 0; i < 1; i++)
                 {
                     var ts = new Thread(() => RunSend(repositoryConfig));
                     ts.Start();
@@ -35,6 +40,7 @@ namespace SmartContract.SendEthereum
                 Console.WriteLine(e.ToString());
             }
         }
+
 
         private static void RunSend(RepositoryConfiguration repositoryConfig)
         {

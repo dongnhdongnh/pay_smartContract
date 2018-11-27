@@ -3,23 +3,22 @@ using System.IO;
 using System.Net;
 using System.Net.Cache;
 using System.Numerics;
+using System.Threading;
 using System.Threading.Tasks;
-using Nethereum.Hex.HexTypes;
-using Nethereum.Contracts.CQS;
-//using Nethereum.StandardTokenEIP20.CQS;
+using Nethereum.ABI.FunctionEncoding.Attributes;
+using Nethereum.Contracts;
+using Nethereum.Hex.HexConvertors.Extensions;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.StandardTokenEIP20.CQS;
 using Nethereum.Web3.Accounts;
 using SmartContract.BlockchainBusiness;
 using SmartContract.Commons.Constants;
 using SmartContract.Commons.Helpers;
 using SmartContract.models.Domains;
 using SmartContract.models.Entities.ETH;
-using Nethereum.StandardTokenEIP20.CQS;
-using Nethereum.ENS;
-using Nethereum.Hex.HexConvertors.Extensions;
-using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
-using System.Threading;
-using Nethereum.Contracts;
+using Nethereum.Web3.Accounts.Managed;
+
 
 namespace SmartContract.EthereumBusiness
 {
@@ -54,7 +53,7 @@ namespace SmartContract.EthereumBusiness
                 // Set a default policy level for the "http:" and "https" schemes.
                 HttpRequestCachePolicy policy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
                 HttpWebRequest.DefaultCachePolicy = policy;
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(EndPointUrl);
+                var httpWebRequest = (HttpWebRequest) WebRequest.Create(EndPointUrl);
                 // Define a cache policy for this request only. 
                 HttpRequestCachePolicy noCachePolicy =
                     new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
@@ -76,7 +75,7 @@ namespace SmartContract.EthereumBusiness
                 }
 
 
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
 
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -117,12 +116,12 @@ namespace SmartContract.EthereumBusiness
                 {
                     From = from,
                     To = toAddress,
-                    Value = ((BigInteger)weiAmount).ToHex()
+                    Value = ((BigInteger) weiAmount).ToHex()
                 };
 
                 //var tx = { from: "0x391694e7e0b0cce554cb130d723a9d27458f9298", to: "0xafa3f8684e54059998bc3a7b0d2b0da075154d66", value: web3.toWei(1.23, "ether")};
                 var result = EthereumSendRPC(EthereumRpcList.RpcName.PersonalSendTransaction,
-                    new Object[] { sender, passphrase });
+                    new Object[] {sender, passphrase});
                 if (result.Status == Status.STATUS_ERROR)
                 {
                     return result;
@@ -152,7 +151,7 @@ namespace SmartContract.EthereumBusiness
 
         public static decimal WeiToEther(BigInteger amount)
         {
-            return ((decimal)amount) / 1000000000000000000;
+            return ((decimal) amount) / 1000000000000000000;
         }
 
         /// <summary>
@@ -168,16 +167,16 @@ namespace SmartContract.EthereumBusiness
             {
                 From = from,
                 To = toAddress,
-                Value = ((int)amount).IntToHex()
+                Value = ((int) amount).IntToHex()
             };
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthSendTransaction, new Object[] { sender });
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthSendTransaction, new Object[] {sender});
         }
 
 
         public ReturnObject FindTransactionByBlockNumberAndIndex(int blockNumber, int transactionIndex)
         {
             return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByBlockNumberAndIndex,
-                new Object[] { blockNumber.IntToHex(), transactionIndex.IntToHex() });
+                new Object[] {blockNumber.IntToHex(), transactionIndex.IntToHex()});
         }
 
 
@@ -258,29 +257,32 @@ namespace SmartContract.EthereumBusiness
         {
             try
             {
-                // var senderAddress = AccountFactory.Address;
-                //  var web3 = _ethereumClientIntegrationFixture.GetWeb3();
-                var abi = @"[{'constant':false,'inputs':[{'name':'_isAllowConvertExchange','type':'bool'}],'name':'setAllowConvertExchange','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[],'name':'setLockAYear','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'name','outputs':[{'name':'','type':'string'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_limitEndDateSecond','type':'uint256'}],'name':'setLimitEndDate','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'LOCK_WITH_EIGHT_WEEKS','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_spender','type':'address'},{'name':'_value','type':'uint256'}],'name':'approve','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'isLock','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_lockEndTimeSecond','type':'uint256'}],'name':'setLockEndTime','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'totalSupply','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'allowTransfers','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_from','type':'address'},{'name':'_to','type':'address'},{'name':'_value','type':'uint256'}],'name':'transferFrom','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[{'name':'','type':'address'}],'name':'balances','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'LOCK_WITH_ONE_YEAR','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_rateExchange','type':'uint256'}],'name':'configRateExchange','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[{'name':'','type':'address'}],'name':'limitedWallets','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'decimals','outputs':[{'name':'','type':'uint8'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'rateExchange','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[],'name':'setLockTwelveWeeks','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_isAllowTransferDollar','type':'bool'}],'name':'setAllowTransferDollar','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'limitedWalletsManager','outputs':[{'name':'','type':'address'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'lockEndTime','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'issuanceFinished','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_from','type':'address'},{'name':'_value','type':'uint256'}],'name':'destroyDollar','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[{'name':'','type':'address'},{'name':'','type':'address'}],'name':'allowed','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_isLock','type':'bool'}],'name':'setLock','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_spender','type':'address'},{'name':'_subtractedValue','type':'uint256'}],'name':'decreaseApproval','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'LIMIT_TRANSFERS_PERIOD','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[],'name':'setLockFourWeeks','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_limitTimeTransferEndDateSecond','type':'uint256'}],'name':'setLimitTimeTransferEndDate','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[{'name':'_owner','type':'address'}],'name':'balanceOf','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'isAllowTransferDollar','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'totalIssue','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_isLimitTimeTransfer','type':'bool'}],'name':'setAllowLimitTimeTransfer','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_wallet','type':'address'}],'name':'delLimitedWalletAddress','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_to','type':'address'},{'name':'_value','type':'uint256'}],'name':'transferDollar','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'isLimitTimeTransfer','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_isLimitEnabled','type':'bool'}],'name':'setAllowLimitedWallet','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_to','type':'address'},{'name':'_value','type':'uint256'}],'name':'issue','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'limitEndDate','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'owner','outputs':[{'name':'','type':'address'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_isLimitWithTime','type':'bool'}],'name':'setAllowLimitedWalletWithTime','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'symbol','outputs':[{'name':'','type':'string'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'lockTotal','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_from','type':'address'},{'name':'_value','type':'uint256'}],'name':'destroy','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'LOCK_WITH_TWELVE_WEEKS','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_to','type':'address'},{'name':'_value','type':'uint256'}],'name':'transfer','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_listener','type':'address'}],'name':'setListener','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'isLimitWithTime','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_lockTotal','type':'uint256'}],'name':'setLockTotal','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_issuanceFinished','type':'bool'}],'name':'setAllowIssuance','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_value','type':'uint256'}],'name':'convert_From_DN_Dollar_To_DN','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'limitTimeTransferEndDate','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_limitedWalletsManager','type':'address'}],'name':'changeLimitedWalletsManager','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'LOCK_WITH_FOUR_WEEKS','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[],'name':'setLockEightWeeks','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'unlockTotal','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'eventListener','outputs':[{'name':'','type':'address'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[],'name':'newOwner','outputs':[{'name':'','type':'address'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[],'name':'confirmOwnership','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_spender','type':'address'},{'name':'_addedValue','type':'uint256'}],'name':'increaseApproval','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_value','type':'uint256'}],'name':'convert_From_DN_To_DN_Dollar','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'isLimitEnabled','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':true,'inputs':[{'name':'_owner','type':'address'},{'name':'_spender','type':'address'}],'name':'allowance','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_allowTransfers','type':'bool'}],'name':'setAllowTransfers','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[],'name':'isAllowConvertExchange','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[{'name':'_from','type':'address'},{'name':'_to','type':'address'},{'name':'_value','type':'uint256'}],'name':'transferFromByOwner','outputs':[{'name':'','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':true,'inputs':[{'name':'','type':'address'}],'name':'balanceDollars','outputs':[{'name':'','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'},{'constant':false,'inputs':[],'name':'setLimitInAYear','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_from','type':'address'},{'name':'_to','type':'address'},{'name':'_value','type':'uint256'}],'name':'transferDollarFromByOwner','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_wallet','type':'address'}],'name':'addLimitedWalletAddress','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_wallet','type':'address'},{'name':'_value','type':'uint256'}],'name':'convert_From_DN_To_DN_Dollar_By_Owner','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_newOwner','type':'address'}],'name':'transferOwnership','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'_wallet','type':'address'},{'name':'_value','type':'uint256'}],'name':'convert_From_DN_Dollar_To_DN_By_Owner','outputs':[],'payable':false,'stateMutability':'nonpayable','type':'function'},{'inputs':[],'payable':false,'stateMutability':'nonpayable','type':'constructor'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_isLock','type':'bool'}],'name':'AllowLockTokenForTime','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_address','type':'address'},{'indexed':false,'name':'_value','type':'uint256'},{'indexed':false,'name':'_receive','type':'uint256'}],'name':'ConvertDN_DNDollar','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_address','type':'address'},{'indexed':false,'name':'_value','type':'uint256'},{'indexed':false,'name':'_receive','type':'uint256'}],'name':'ConvertDNDollar_DN','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'isAllowConvertExchange','type':'bool'}],'name':'AllowConvertExchange','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_value','type':'uint256'}],'name':'ConfigRateExchange','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_isAllowTransferDollar','type':'bool'}],'name':'AllowTransferDollar','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_from','type':'address'},{'indexed':false,'name':'_to','type':'address'},{'indexed':false,'name':'_value','type':'uint256'}],'name':'TransferDollar','type':'event'},{'anonymous':false,'inputs':[],'name':'TransfersEnabled','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_newState','type':'bool'}],'name':'AllowTransfersChanged','type':'event'},{'anonymous':false,'inputs':[{'indexed':true,'name':'_to','type':'address'},{'indexed':false,'name':'_value','type':'uint256'}],'name':'Issue','type':'event'},{'anonymous':false,'inputs':[{'indexed':true,'name':'_from','type':'address'},{'indexed':false,'name':'_value','type':'uint256'}],'name':'Destroy','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'_issuanceFinished','type':'bool'}],'name':'IssuanceFinished','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'previousOwner','type':'address'},{'indexed':false,'name':'newOwner','type':'address'}],'name':'OwnershipTransferred','type':'event'},{'anonymous':false,'inputs':[{'indexed':true,'name':'_from','type':'address'},{'indexed':true,'name':'_to','type':'address'},{'indexed':false,'name':'_value','type':'uint256'}],'name':'Transfer','type':'event'},{'anonymous':false,'inputs':[{'indexed':true,'name':'_owner','type':'address'},{'indexed':true,'name':'_spender','type':'address'},{'indexed':false,'name':'_value','type':'uint256'}],'name':'Approval','type':'event'}]";
-                var url = AppSettingHelper.GetEthereumNode();
-                string contractName = "King.sol";
-                int accountUnlockTime = 120;
-                string accountPublicKey = "0xC2A213f481b2C794704218365E13d4761820B398";
-                string accountPassword = "08786bec5c4b2ac8cb6dcafb320a3486d59a0e9f81860792fe13ca0a962cda3e";
-                var contractAddress = "0x970de7a6ab0e062c5cfae6d342887b5eac1a3552";
-                HexBigInteger gas = new HexBigInteger(3000000);
-                var multiplier = 7;
+                var privateKey = "08786bec5c4b2ac8cb6dcafb320a3486d59a0e9f81860792fe13ca0a962cda3e";
 
 
-              //  bool unlockResult = await Web3Api.UnlockAccount(accountPublicKey, accountPassword, (ulong)accountUnlockTime);
-                Nethereum.Contracts.Contract contract = Web3Api.GetContract(abi, contractAddress);
-                var funct = Web3Api.getFunction(contract, "balances");
-                var result = await funct.CallAsync<System.Numerics.BigInteger>("0xc942F1D286d9b8002206CbB3196f46Fa892aAD93");
-                Console.WriteLine("Result of function getOwner", result);
+                var senderAddress = "0xc2a213f481b2c794704218365e13d4761820b398";
+                var contractAddress = "0x8070f3cba5833490b8794e2b4894b59a45cbbba8";
+                var account = new Account(privateKey);
+                var web3 = new Web3(account, "https://ropsten.infura.io/v3/e2bd8adca45547c38efb10566fa7eec1");
+                var newAddress = "0x15118dB6ED8Fa2f461d62F395DC55C51c42f3488";
+                var value = (BigInteger) EtherToWei(blockchainTransaction.Amount);
+                var transactionMessage = new TransferFunction()
+                {
+                    FromAddress = senderAddress,
+                    To = newAddress,
+                    Value = value
+                };
+
+                var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
+                var transferReceipt =
+                    await transferHandler.SendRequestAndWaitForReceiptAsync(transactionMessage, contractAddress);
 
 
-
-                return null;
-           
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_COMPLETED,
+                    Data = transferReceipt.TransactionHash
+                };
             }
             catch (Exception e)
             {
@@ -293,13 +295,25 @@ namespace SmartContract.EthereumBusiness
             }
         }
 
+        public static async Task<TransactionReceipt> MineAndGetReceiptAsync(Web3 web3, string transactionHash)
+        {
+            var receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(transactionHash);
+            while (receipt == null)
+            {
+                Thread.Sleep(4000);
+                receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(transactionHash);
+            }
+
+            return receipt;
+        }
+
 
         public ReturnObject GetBlockByNumber(int blockNumber)
         {
             try
             {
                 ReturnObject result = EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByNumber,
-                    new Object[] { blockNumber.IntToHex(), true });
+                    new Object[] {blockNumber.IntToHex(), true});
                 //Console.WriteLine(_result);
                 if (result.Status == Status.STATUS_ERROR)
                 {
@@ -335,7 +349,7 @@ namespace SmartContract.EthereumBusiness
 
         public ReturnObject FindTransactionByHash(string hash)
         {
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByHash, new Object[] { hash });
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetTransactionByHash, new Object[] {hash});
         }
 
         public async Task<ReturnObject> FindTransactionByHashAsyn(string transactionHash)
@@ -345,13 +359,13 @@ namespace SmartContract.EthereumBusiness
 
         public ReturnObject FindBlockByHash(string hash)
         {
-            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByHash, new Object[] { hash, true });
+            return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByHash, new Object[] {hash, true});
         }
 
         public ReturnObject FindBlockByNumber(int number)
         {
             return EthereumSendRPC(EthereumRpcList.RpcName.EthGetBlockByNumber,
-                new Object[] { number.IntToHex(), true });
+                new Object[] {number.IntToHex(), true});
             //return null;
         }
 
@@ -398,129 +412,4 @@ namespace SmartContract.EthereumBusiness
             //return 
         }
     }
-
-    public class Web3Api
-    {
-        //Singleton
-        private static Web3 _web3;
-        public static Web3 mWeb3
-        {
-            get
-            {
-                if (_web3 == null)
-                {
-                    _web3 = new Nethereum.Web3.Web3(AppSettingHelper.GetEthereumNode());
-                }
-
-                return _web3;
-            }
-        }
-
-        public static async Task<bool> UnlockAccount(string accountPublicKey, string accountPassword, ulong accountUnlockTime)
-        {
-            bool unlockResult = await mWeb3.Personal.UnlockAccount.SendRequestAsync(accountPublicKey, accountPassword, accountUnlockTime);
-
-            return unlockResult;
-        }
-
-        //public static async Task<TheContract> GetTheContract(string contractName)
-        //{
-        //    string actionUrl = Utility.CombineUri(Link.HOST, "smart-contract/get-the-contract");
-        //    string pathFile = Utility.GetPathFileContract(contractName);
-
-        //    if (!System.IO.File.Exists(pathFile))
-        //    {
-        //        SanitaLog.Error("Not find " + pathFile);
-        //        return null;
-        //    }
-        //    HttpContent fileStreamContent = new ByteArrayContent(System.IO.File.ReadAllBytes(pathFile));
-
-        //    using (HttpClient client = new HttpClient())
-        //    using (MultipartFormDataContent formData = new MultipartFormDataContent())
-        //    {
-        //        formData.Add(fileStreamContent, "file", contractName);
-
-        //        var response = await client.PostAsync(actionUrl, formData);
-
-        //        response.EnsureSuccessStatusCode();
-
-        //        var contentString = await response.Content.ReadAsStringAsync();
-        //        var contents = JObject.Parse(contentString);
-        //        ResultApi result = JsonConvert.DeserializeObject<ResultApi>(contentString);
-
-        //        client.Dispose();
-
-        //        if (result.status == "success")
-        //        {
-        //            TheContract mTheContract = JsonConvert.DeserializeObject<TheContract>(result.data);
-        //            SanitaLog.Log("Abi", mTheContract.Abi);
-        //            SanitaLog.Log("ByteCode", mTheContract.Bytecode);
-        //            return mTheContract;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
-
-        //Deploy the contract
-        public static async Task<string> WaitDeploy(string abi, string byteCode, string accountPublicKey, HexBigInteger gas, params object[] values)
-        {
-            string transactionHash = await Web3Api.mWeb3.Eth.DeployContract.SendRequestAsync(abi, byteCode, accountPublicKey, gas, values);
-            return transactionHash;
-        }
-
-        //Mine the transaction of deployment and Get a receipt for that transaction
-        public static async Task<TransactionReceipt> WaitMiner(string transactionHash)
-        {
-            TransactionReceipt receipt = null;
-
-            // If receipt is null it means the Contract creation transaction is not minded yet.
-            while (receipt == null)
-            {
-                receipt = await mWeb3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(transactionHash);
-                Thread.Sleep(4000);
-            }
-
-
-
-            //string contractAddress = receipt.ContractAddress;
-            //var EthGetTransactionReceipt = Web3Api.mWeb3.Eth.Transactions.GetTransactionReceipt;
-            //var EthCall = Web3Api.mWeb3.Eth.Transactions.Call;
-            //var EthEstimateGas = Web3Api.mWeb3.Eth.Transactions.EstimateGas;
-            //var EthGetTransactionByBlockHashAndIndex = Web3Api.mWeb3.Eth.Transactions.GetTransactionByBlockHashAndIndex;
-            //var NetPeerCount = Web3Api.mWeb3.Net.PeerCount;
-            //var EthGetBalance = Web3Api.mWeb3.Eth.GetBalance;
-            //var EthMining = Web3Api.mWeb3.Eth.Mining.IsMining;
-            //var EthAccounts = Web3Api.mWeb3.Eth.Accounts;
-
-            return receipt;
-        }
-
-        #region CALL Multiply
-
-        // Retrieve the total number of transactions of your sender address
-
-        public static Nethereum.Contracts.Contract GetContract(string abi, string contractAddress)
-        {
-            Nethereum.Contracts.Contract contract = mWeb3.Eth.GetContract(abi, contractAddress);
-            return contract;
-        }
-
-        public static async Task<HexBigInteger> GetTotalTransactions(string senderAddress)
-        {
-            HexBigInteger transactionCount = await Web3Api.mWeb3.Eth.Transactions.GetTransactionCount.SendRequestAsync(senderAddress);
-            return transactionCount;
-        }
-
-        public static Function getFunction(Nethereum.Contracts.Contract contract, string functionName)
-        {
-            Function funct = contract.GetFunction(functionName);
-            return funct;
-        }
-
-        #endregion CALL Multiply
-    }
-
 }

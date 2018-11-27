@@ -58,6 +58,13 @@ namespace SmartContract.BlockchainBusiness
         Task<ReturnObject> SendTransactionAsync(BlockchainTransaction blockchainTransaction);
 
         /// <summary>
+        /// Send asyn transaction with transaction data
+        /// </summary>
+        /// <param name="blockchainTransaction"></param>
+        /// <returns></returns>
+        Task<ReturnObject> SendTransactionAsync1(BlockchainTransaction blockchainTransaction);
+
+        /// <summary>
         /// Get block by block number
         /// </summary>
         /// <param name="blockNumber"></param>
