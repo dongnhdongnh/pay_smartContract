@@ -19,6 +19,7 @@ namespace SmartContract.ScanEthereum
             {
                 ConnectionString = AppSettingHelper.GetDbConnection()
             };
+
             RunScan(repositoryConfig);
         }
 
@@ -28,6 +29,20 @@ namespace SmartContract.ScanEthereum
             var repoFactory = new SmartContractRepositoryMysqlPersistenceFactory(repositoryConfig);
 
             var ethereumBusiness = new EthereumBusiness.EthereumBusiness(repoFactory);
+            var rpc = new EthereumRpc(AppSettingHelper.GetEthereumNode());
+            rpc.GetBlockNumber();
+            var result = rpc.GetBlockNumber();
+            if (result.Status == Status.STATUS_ERROR)
+            {
+                throw new Exception("Cant GetBlockNumber");
+            }
+            int blockNumber = 0;
+            if (!int.TryParse(result.Data, out blockNumber))
+            {
+                throw new Exception("Cant parse block number");
+            }
+            CacheHelper.SetCacheString(String.Format(RedisCacheKey.KEY_SCANBLOCK_LASTSCANBLOCK,
+                       CryptoCurrency.ETH), blockNumber.ToString());
             //      var walletBusiness = new WalletBusiness.WalletBusiness(repoFactory);
             var connection = repoFactory.GetOldConnection() ?? repoFactory.GetDbConnection();
             try
@@ -36,12 +51,12 @@ namespace SmartContract.ScanEthereum
                 {
                     Console.WriteLine("==========Start Scan Ethereum==========");
 
-                    var rpc = new EthereumRpc(AppSettingHelper.GetEthereumNode());
+
 
                     // var rpc = new EthereumRpc(AppSettingHelper.GetEthereumNode());
-                    var _re = rpc.FindTransactionByHash("0x1ed65fc78c3bf3a8d7cf07ee5e632b274c56df0b777d5903d04952b4ef3c9591");
+                    //  var _re = rpc.FindTransactionByHash("0xe62ea756f9dbb5eb2439ea946eab1a3413c5517ebe6eecfb6d067a5d849fcf1f");
                     // foreach(var tran in _re.)
-                    var _input = rpc.DecodeInput("0xa9059cbb0000000000000000000000003a2e25cfb83d633c184f6e4de1066552c5bf45170000000000000000000000000000000000000000000000008ac7230489e80000");
+                    //var _input = rpc.DecodeInput("0xa9059cbb0000000000000000000000003a2e25cfb83d633c184f6e4de1066552c5bf45170000000000000000000000000000000000000000000000008ac7230489e80000");
                     using (var ethereumRepo = repoFactory.GetEthereumWithdrawTransactionRepository(connection))
                     {
                         using (var ethereumDepoRepo = repoFactory.GetEthereumDepositeTransactionRepository(connection))
@@ -56,7 +71,7 @@ namespace SmartContract.ScanEthereum
 
                             Console.WriteLine("==========Scan Ethereum End==========");
                             Console.WriteLine("==========Wait for next scan==========");
-                            Thread.Sleep(5000);
+                            Thread.Sleep(50000);
                         }
                     }
                 }
