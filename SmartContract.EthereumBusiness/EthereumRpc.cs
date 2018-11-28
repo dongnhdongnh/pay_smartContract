@@ -5,6 +5,7 @@ using System.Net.Cache;
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
+using Nethereum.ABI.FunctionEncoding;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexConvertors.Extensions;
@@ -289,12 +290,17 @@ namespace SmartContract.EthereumBusiness
                     Value = value
                 };
 
+                
+                
                 var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
 
                 var transferReceipt =
                     await transferHandler.SendRequestAndWaitForReceiptAsync(transactionMessage, contractAddress);
-
-
+        
+//                var transaction = await web3.Eth.Transactions.GetTransactionByHash.SendRequestAsync(transferReceipt.TransactionHash);
+//                var input = await transferHandler.CreateTransactionInputEstimatingGasAsync(transactionMessage, contractAddress);
+//                var test = transferHandler.DecodeInput(transactionMessage, input, contractAddress);
+//                
                 return new ReturnObject
                 {
                     Status = Status.STATUS_COMPLETED,
