@@ -159,7 +159,7 @@ namespace SmartContract.EthereumBusiness
             string networkName,
             IRepositoryBlockchainTransaction<TWithDraw> withdrawRepoQuery,
             IRepositoryBlockchainTransaction<TDeposit> depositRepoQuery,
-            IBlockchainRpc rpcClass)
+            EthereumRpc rpcClass)
             where TWithDraw : BlockchainTransaction
             where TDeposit : BlockchainTransaction
             where TBlockResponse : EthereumBlockResponse
@@ -223,6 +223,11 @@ namespace SmartContract.EthereumBusiness
                         {
                             if (AppSettingHelper.GetSmartContractAddress().Equals(trans.To))
                             {
+                                var paras = rpcClass.DecodeInput(trans.Input);
+                                foreach (var para in paras)
+                                {
+                                    Console.WriteLine(para.Parameter.Name + "_" + para.Result.ToString());
+                                }
                                 Console.WriteLine(JsonHelper.SerializeObject(trans));
                             }
                         }

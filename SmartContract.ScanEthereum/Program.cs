@@ -37,7 +37,11 @@ namespace SmartContract.ScanEthereum
                     Console.WriteLine("==========Start Scan Ethereum==========");
 
                     var rpc = new EthereumRpc(AppSettingHelper.GetEthereumNode());
+
+                    // var rpc = new EthereumRpc(AppSettingHelper.GetEthereumNode());
                     var _re = rpc.FindTransactionByHash("0x1ed65fc78c3bf3a8d7cf07ee5e632b274c56df0b777d5903d04952b4ef3c9591");
+                    // foreach(var tran in _re.)
+                    var _input = rpc.DecodeInput("0xa9059cbb0000000000000000000000003a2e25cfb83d633c184f6e4de1066552c5bf45170000000000000000000000000000000000000000000000008ac7230489e80000");
                     using (var ethereumRepo = repoFactory.GetEthereumWithdrawTransactionRepository(connection))
                     {
                         using (var ethereumDepoRepo = repoFactory.GetEthereumDepositeTransactionRepository(connection))

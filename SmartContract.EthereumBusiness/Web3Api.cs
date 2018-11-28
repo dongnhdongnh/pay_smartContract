@@ -1,4 +1,5 @@
-﻿using Nethereum.Contracts;
+﻿using Nethereum.ABI.FunctionEncoding;
+using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
@@ -140,6 +141,16 @@ namespace SmartContract.EthereumBusiness
             return funct;
         }
 
+        public static List<ParameterOutput> DecodeInput(string input, Function funtion)
+        {
+            return funtion.DecodeInput(input);
+            //mWeb3.Eth.
+            //Nethereum.ABI.FunctionEncoding.ParameterDecoder dec = new Nethereum.ABI.FunctionEncoding.ParameterDecoder();
+            //dec.DecodeDefaultData(input,);
+            //   = new Nethereum.Contracts.Contract();
+            // contracts.
+
+        }
         #endregion CALL Multiply
     }
 }
