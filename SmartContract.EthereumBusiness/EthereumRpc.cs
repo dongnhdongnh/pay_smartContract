@@ -290,17 +290,17 @@ namespace SmartContract.EthereumBusiness
                     Value = value
                 };
 
-                
-                
+
+
                 var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
 
                 var transferReceipt =
                     await transferHandler.SendRequestAndWaitForReceiptAsync(transactionMessage, contractAddress);
-        
-//                var transaction = await web3.Eth.Transactions.GetTransactionByHash.SendRequestAsync(transferReceipt.TransactionHash);
-//                var input = await transferHandler.CreateTransactionInputEstimatingGasAsync(transactionMessage, contractAddress);
-//                var test = transferHandler.DecodeInput(transactionMessage, input, contractAddress);
-//                
+
+                //                var transaction = await web3.Eth.Transactions.GetTransactionByHash.SendRequestAsync(transferReceipt.TransactionHash);
+                //                var input = await transferHandler.CreateTransactionInputEstimatingGasAsync(transactionMessage, contractAddress);
+                //                var test = transferHandler.DecodeInput(transactionMessage, input, contractAddress);
+                //                
                 return new ReturnObject
                 {
                     Status = Status.STATUS_COMPLETED,
@@ -337,11 +337,17 @@ namespace SmartContract.EthereumBusiness
 
             try
             {
+                //  var unlockResult = await web3.Personal.UnlockAccount.SendRequestAsync(senderAddress, password, new HexBigInteger(120));
+                //  Assert.True(unlockResult);
+                // bool unlockResult = await Web3Api.UnlockAccount(AppSettingHelper.GetSmartContractPublicKey(), AppSettingHelper.GetSmartContractPrivateKey(), 120);
                 string abi = AppSettingHelper.GetSmartContractAbi();
                 Nethereum.Contracts.Contract contract = Web3Api.GetContract(abi, AppSettingHelper.GetSmartContractAddress());
-                Function funct = Web3Api.getFunction(contract, "balances");
-                var result = await funct.CallAsync<BigInteger>("0xc942F1D286d9b8002206CbB3196f46Fa892aAD93");
-                Console.WriteLine(result);
+                Function funct1 = Web3Api.getFunction(contract, "balanceDollars");
+                var result1 = await funct1.CallAsync<BigInteger>("0xc942F1D286d9b8002206CbB3196f46Fa892aAD93");
+                Function funct = Web3Api.getFunction(contract, "transfer");
+                var _thing = await funct.SendTransactionAndWaitForReceiptAsync(AppSettingHelper.GetSmartContractPublicKey(), null, "0xc942F1D286d9b8002206CbB3196f46Fa892aAD93", 100000000000000);
+                // var result = await funct.CallDeserializingToObjectAsync<bool>("0xc942F1D286d9b8002206CbB3196f46Fa892aAD93", 100000000000000);
+                Console.WriteLine(_thing);
                 return new ReturnObject
                 {
                     Status = Status.STATUS_COMPLETED,

@@ -3,6 +3,7 @@ using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
+using Nethereum.Web3.Accounts;
 using SmartContract.Commons.Helpers;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,10 @@ namespace SmartContract.EthereumBusiness
             {
                 if (_web3 == null)
                 {
-                    _web3 = new Nethereum.Web3.Web3(AppSettingHelper.GetEthereumNode());
+                    var account = new Account(AppSettingHelper.GetSmartContractPrivateKey());
+                    _web3 = new Nethereum.Web3.Web3(account, AppSettingHelper.GetEthereumNode());
+                    _web3.TransactionManager.DefaultGas = 40000;
+                    //  _web3.TransactionManager.DefaultGasPrice = Transaction.DEFAULT_GAS_PRICE;
                 }
 
                 return _web3;

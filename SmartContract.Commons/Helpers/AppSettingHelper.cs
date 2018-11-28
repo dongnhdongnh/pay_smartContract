@@ -73,7 +73,17 @@ namespace SmartContract.Commons.Helpers
         public static string GetSmartContractAddress()
         {
 
-            return "0x970de7a6ab0e062c5cfae6d342887b5eac1a3552";
+            return "0x8070F3cba5833490b8794E2b4894b59A45cBbBa8";
+        }
+        public static string GetSmartContractPublicKey()
+        {
+
+            return "0xC2A213f481b2C794704218365E13d4761820B398";
+        }
+        public static string GetSmartContractPrivateKey()
+        {
+
+            return "08786bec5c4b2ac8cb6dcafb320a3486d59a0e9f81860792fe13ca0a962cda3e";
         }
 
         public static string GetRedisConfig()
