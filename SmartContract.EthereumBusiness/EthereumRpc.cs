@@ -202,7 +202,6 @@ namespace SmartContract.EthereumBusiness
                 var privateKey = ecKey.GetPrivateKeyAsBytes().ToHex();
                 var account = new Account(privateKey);
 
-
                 return new ReturnObject
                 {
                     Status = Status.STATUS_COMPLETED,
@@ -288,11 +287,11 @@ namespace SmartContract.EthereumBusiness
 
                 string abi = AppSettingHelper.GetSmartContractAbi();
                 Nethereum.Contracts.Contract contract = web3.Eth.GetContract(abi, AppSettingHelper.GetSmartContractAddress());
-                var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
+               // var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
                 
-                var gas =  await transferHandler.EstimateGasAsync(transactionMessage, AppSettingHelper.GetSmartContractAddress());
+                //var gas =  await transferHandler.EstimateGasAsync(transactionMessage, AppSettingHelper.GetSmartContractAddress());
 
-                web3.TransactionManager.DefaultGas = gas.Value*2;
+                web3.TransactionManager.DefaultGas = 300000;
                 Function funct = contract.GetFunction( "transferFromByOwner");
                 var _thing = await funct.SendTransactionAndWaitForReceiptAsync(AppSettingHelper.GetSmartContractPublicKey(), null,blockchainTransaction.FromAddress, blockchainTransaction.ToAddress, value);
                              
