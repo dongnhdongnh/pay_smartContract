@@ -271,54 +271,37 @@ namespace SmartContract.EthereumBusiness
         {
             try
             {
-                var privateKey = "08786bec5c4b2ac8cb6dcafb320a3486d59a0e9f81860792fe13ca0a962cda3e";
 
-
-                var senderAddress = "0xc2a213f481b2c794704218365e13d4761820b398";
-                var contractAddress = "0x8070f3cba5833490b8794e2b4894b59a45cbbba8";
-                var account = new Account(privateKey);
+                
+                var account = new Account(AppSettingHelper.GetSmartContractPrivateKey());
 
                 var web3 = new Web3(account, "https://ropsten.infura.io/v3/e2bd8adca45547c38efb10566fa7eec1");
-                var txCount = await web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(senderAddress);
+                var txCount = await web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(AppSettingHelper.GetSmartContractPublicKey());
                 var value = (BigInteger)EtherToWei(blockchainTransaction.Amount);
 
                 var transactionMessage = new TransferFunction()
                 {
-                    FromAddress = senderAddress,
+                    FromAddress = blockchainTransaction.FromAddress,
                     To = blockchainTransaction.ToAddress,
-                    Nonce = txCount.Value,
                     Value = value
                 };
 
-
-
+                string abi = AppSettingHelper.GetSmartContractAbi();
+                Nethereum.Contracts.Contract contract = web3.Eth.GetContract(abi, AppSettingHelper.GetSmartContractAddress());
                 var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
+                
+                var gas =  await transferHandler.EstimateGasAsync(transactionMessage, AppSettingHelper.GetSmartContractAddress());
 
-                var transferReceipt =
-                    await transferHandler.SendRequestAndWaitForReceiptAsync(transactionMessage, contractAddress);
-
-                //                var transaction = await web3.Eth.Transactions.GetTransactionByHash.SendRequestAsync(transferReceipt.TransactionHash);
-                //                var input = await transferHandler.CreateTransactionInputEstimatingGasAsync(transactionMessage, contractAddress);
-                //                var test = transferHandler.DecodeInput(transactionMessage, input, contractAddress);
-                //                
+                web3.TransactionManager.DefaultGas = gas.Value*2;
+                Function funct = contract.GetFunction( "transferFromByOwner");
+                var _thing = await funct.SendTransactionAndWaitForReceiptAsync(AppSettingHelper.GetSmartContractPublicKey(), null,blockchainTransaction.FromAddress, blockchainTransaction.ToAddress, value);
+                             
                 return new ReturnObject
                 {
                     Status = Status.STATUS_COMPLETED,
-                    Data = transferReceipt.TransactionHash
+                    Data = _thing.TransactionHash
                 };
-                //                var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
-                //                
-                //                
-                //                var transferReceipt =
-                //                    await transferHandler.SignTransactionAsync(transactionMessage, contractAddress);
-                //                
-                //                
-                //                
-                //                var resultSend =
-                //                    EthereumSendRPC(EthereumRpcList.RpcName.EthSendDrawTransaction, new Object[] {"0x" + transferReceipt});
-                //               
-                //                return resultSend;
-
+              
 
             }
             catch (Exception e)
