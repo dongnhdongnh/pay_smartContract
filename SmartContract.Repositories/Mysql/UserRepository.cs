@@ -251,5 +251,36 @@ namespace SmartContract.Repositories.Mysql
                 };
             }
         }
+
+        public ReturnObject AddBalance(string uid, decimal addBalance)
+        {
+            try
+            {
+                if (Connection.State != ConnectionState.Open)
+                    Connection.Open();
+
+                var sQuery = $"UPDATE {TableName} SET mem_dn_balance=mem_dn_balance+@addBalance WHERE mem_id = @mem_id";
+                var result = 0;
+
+                result = Connection.Execute(sQuery, new { mem_id = uid, addBalance = addBalance });
+
+
+                var status = result > 0 ? Status.STATUS_SUCCESS : Status.STATUS_ERROR;
+                //	Console.WriteLine("Excute thing " + result);
+                return new ReturnObject
+                {
+                    Status = status,
+                    Message = status == Status.STATUS_ERROR ? "Cannot Excute" : "Excute Success"
+                };
+            }
+            catch (Exception e)
+            {
+                return new ReturnObject
+                {
+                    Status = Status.STATUS_ERROR,
+                    Message = e.Message
+                };
+            }
+        }
     }
 }

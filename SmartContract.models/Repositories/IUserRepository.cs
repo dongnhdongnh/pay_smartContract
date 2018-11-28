@@ -9,7 +9,7 @@ namespace SmartContract.models.Repositories
 {
     public interface IUserRepository : IRepositoryBase<User>, IDisposable
     {
-        
+
         string QuerySearch(Dictionary<string, string> models);
         User FindWhere(string sql);
         string FindEmailBySendTransaction(BlockchainTransaction transaction);
@@ -20,6 +20,7 @@ namespace SmartContract.models.Repositories
         User FindByIdUser(string id);
         Task<ReturnObject> ReleaseLock(User row);
         ReturnObject UpdateUser(User objectUpdate);
+        ReturnObject AddBalance(string uid, decimal addBalance);
         List<User> FindAllUser();
     }
 }
