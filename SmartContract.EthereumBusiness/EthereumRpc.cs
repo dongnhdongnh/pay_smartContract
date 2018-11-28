@@ -447,10 +447,10 @@ namespace SmartContract.EthereumBusiness
                 }
                 else
                 {
-                    EthRpcJson.Getter getter =
-                        JsonHelper.DeserializeObject<EthRpcJson.Getter>(result.Data);
+                    //EthRpcJson.Getter getter =
+                    //    JsonHelper.DeserializeObject<EthRpcJson.Getter>(result.Data);
                     int _blockNumber = -1;
-                    if (!getter.Result.ToString().HexToInt(out _blockNumber))
+                    if (!result.Data.ToString().HexToInt(out _blockNumber))
                     {
                         throw new Exception("cant get int from hex");
                     }
