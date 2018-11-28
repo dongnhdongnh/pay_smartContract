@@ -356,6 +356,7 @@ namespace SmartContract.EthereumBusiness
                                             _deposite.ToAddress = _toAddress;
                                             _deposite.UserId = user.mem_id;
                                             _deposite.Hash = trans.Hash;
+                                           
                                             BigInteger amount = 0;
                                             if (BigInteger.TryParse(_value, out amount))
                                             {
@@ -365,6 +366,7 @@ namespace SmartContract.EthereumBusiness
                                             int bNum = 0;
                                             if (trans.BlockNumber.HexToInt(out bNum))
                                                 _deposite.BlockNumber = bNum;
+                                            _deposite.Status = Status.STATUS_COMPLETED;
                                             _deposite.CreatedAt = (int)CommonHelper.GetUnixTimestamp();
                                             _deposite.UpdatedAt = (int)CommonHelper.GetUnixTimestamp();
 
