@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using SmartContract.BlockchainBusiness;
 using SmartContract.BlockchainBusiness.Base;
@@ -192,10 +193,11 @@ namespace SmartContract.EthereumBusiness
                 //Get list of new block that have transactions
                 if (lastBlock >= blockNumber)
                     lastBlock = blockNumber;
-                lastBlock = blockNumber - 100000;
+                //lastBlock = 4519651;
+                //blockNumber = 4519660;
                 Console.WriteLine("SCAN FROM " + lastBlock + "___" + blockNumber);
                 List<TBlockResponse> blocks = new List<TBlockResponse>();
-                for (int i = lastBlock; i <= blockNumber; i++)
+                for (int i = lastBlock; i <= blockNumber - 1; i++)
                 {
                     if (i < 0) continue;
                     result = rpcClass.GetBlockByNumber(i);
@@ -219,22 +221,23 @@ namespace SmartContract.EthereumBusiness
                         //}
 
                         blocks.Add(block);
-                        foreach (var trans in block.TransactionsResponse)
-                        {
-                            if (AppSettingHelper.GetSmartContractAddress().Equals(trans.To))
-                            {
-                                var paras = rpcClass.DecodeInput(trans.Input);
-                                foreach (var para in paras)
-                                {
-                                    Console.WriteLine(para.Parameter.Name + "_" + para.Result.ToString());
-                                }
-                                Console.WriteLine(JsonHelper.SerializeObject(trans));
-                            }
-                        }
-                        Console.WriteLine("Add block" + blocks.Count);
+                        //foreach (var trans in block.TransactionsResponse)
+                        //{
+                        //    if (trans.To != null)
+                        //        if (AppSettingHelper.GetSmartContractAddress().ToLower().Equals(trans.To.ToLower()))
+                        //        {
+                        //            var paras = rpcClass.DecodeInput(trans.Input);
+                        //            foreach (var para in paras)
+                        //            {
+                        //                Console.WriteLine(para.Parameter.Name + "_" + para.Result.ToString());
+                        //            }
+                        //            //  Console.WriteLine(JsonHelper.SerializeObject(trans));
+                        //        }
+                        //}
+                        Console.WriteLine("Add block " + i);
                     }
                 }
-                Console.WriteLine("Total block" + blocks.Count);
+                Console.WriteLine("Total block has transaction: " + blocks.Count);
                 CacheHelper.SetCacheString(String.Format(RedisCacheKey.KEY_SCANBLOCK_LASTSCANBLOCK, networkName),
                     blockNumber.ToString());
                 if (blocks.Count <= 0)
@@ -245,46 +248,46 @@ namespace SmartContract.EthereumBusiness
                 //check Transaction and update:
                 //Search transactions which need to scan:
 
-                var withdrawPendingTransactions = withdrawRepoQuery.FindTransactionsNotCompleteOnNet();
-                //Scan all block and check Withdraw transaction:
-                Console.WriteLine("Scan withdrawPendingTransactions");
-                if (withdrawPendingTransactions.Count > 0)
-                {
-                    foreach (TBlockResponse block in blocks)
-                    {
-                        if (withdrawPendingTransactions.Count <= 0)
-                        {
-                            //SCAN DONE:
-                            break;
-                        }
+                //var withdrawPendingTransactions = withdrawRepoQuery.FindTransactionsNotCompleteOnNet();
+                ////Scan all block and check Withdraw transaction:
+                //Console.WriteLine("Scan withdrawPendingTransactions");
+                //if (withdrawPendingTransactions.Count > 0)
+                //{
+                //    foreach (TBlockResponse block in blocks)
+                //    {
+                //        if (withdrawPendingTransactions.Count <= 0)
+                //        {
+                //            //SCAN DONE:
+                //            break;
+                //        }
 
-                        for (int i = withdrawPendingTransactions.Count - 1; i >= 0; i--)
-                        {
-                            BlockchainTransaction currentPending = withdrawPendingTransactions[i];
-                            EthereumTransactionResponse trans =
-                                block.TransactionsResponse.SingleOrDefault(x => x.Hash.Equals(currentPending.Hash));
-                            int _blockNumber = -1;
-                            int fee = 0;
+                //        for (int i = withdrawPendingTransactions.Count - 1; i >= 0; i--)
+                //        {
+                //            BlockchainTransaction currentPending = withdrawPendingTransactions[i];
+                //            EthereumTransactionResponse trans =
+                //                block.TransactionsResponse.SingleOrDefault(x => x.Hash.Equals(currentPending.Hash));
+                //            int _blockNumber = -1;
+                //            int fee = 0;
 
-                            if (trans != null)
-                            {
-                                trans.BlockNumber.HexToInt(out _blockNumber);
-                                if (trans.Fee != null)
-                                    trans.Fee.HexToInt(out fee);
-                                Console.WriteLine("HELLO " + currentPending.Hash);
-                                currentPending.BlockNumber = _blockNumber;
-                                currentPending.Fee = fee;
-                                currentPending.UpdatedAt = (int)CommonHelper.GetUnixTimestamp();
-                                //	_currentPending.Status = Status.StatusCompleted;
-                                //	_currentPending.InProcess = 0;
-                                Console.WriteLine("CaLL UPDATE");
+                //            if (trans != null)
+                //            {
+                //                trans.BlockNumber.HexToInt(out _blockNumber);
+                //                if (trans.Fee != null)
+                //                    trans.Fee.HexToInt(out fee);
+                //                Console.WriteLine("HELLO " + currentPending.Hash);
+                //                currentPending.BlockNumber = _blockNumber;
+                //                currentPending.Fee = fee;
+                //                currentPending.UpdatedAt = (int)CommonHelper.GetUnixTimestamp();
+                //                //	_currentPending.Status = Status.StatusCompleted;
+                //                //	_currentPending.InProcess = 0;
+                //                Console.WriteLine("CaLL UPDATE");
 
-                                withdrawRepoQuery.Update((TWithDraw)currentPending);
-                                withdrawPendingTransactions.RemoveAt(i);
-                            }
-                        }
-                    }
-                }
+                //                withdrawRepoQuery.Update((TWithDraw)currentPending);
+                //                withdrawPendingTransactions.RemoveAt(i);
+                //            }
+                //        }
+                //    }
+                //}
 
                 Console.WriteLine("Scan withdrawPendingTransactions Done");
                 using (var dbConnection = SmartContractRepositoryFactory.GetDbConnection())
@@ -297,46 +300,83 @@ namespace SmartContract.EthereumBusiness
                     {
                         foreach (EthereumTransactionResponse trans in block.TransactionsResponse)
                         {
-                            string toAddress = trans.To;
-                            if (toAddress.Equals(AppSettingHelper.GetSmartContractAddress()))
+
+                            if (trans.To != null)
                             {
-                                JsonHelper.SerializeObject(trans);
-                            }
-                            var user = userRepository.FindByAddress(toAddress);
-                            //  var _sendWallet = wallet.FindWalletByAddressAndNetworkName(toAddress, networkName);
-                            if (user == null)
-                            //if(false)
-                            {
-                                //logger.Info(to + " is not exist in Wallet!!!");
-                                continue;
-                            }
-                            else
-                            {
-                                //Console.WriteLine("value" + _trans.value);
-                                if (trans.Value.HexToBigInteger(out var transactionValue))
+                                if (AppSettingHelper.GetSmartContractAddress().ToLower().Equals(trans.To.ToLower()))
                                 {
-                                    // var userID = "";
+                                    var paras = rpcClass.DecodeInput(trans.Input);
+                                    string _fromAddress = "";
+                                    string _toAddress = "";
+                                    string _value = "";
 
-                                    // if (_sendWallet != null)
-                                    //wallet.UpdateBalanceDeposit(toAddress, EthereumRpc.WeiToEther(transactionValue),
-                                    //  networkName);
-                                    var _deposite = new EthereumTransaction.EthereumDepositTransaction();
-                                    _deposite.Id = CommonHelper.GenerateUuid();
-                                    _deposite.FromAddress = trans.From;
-                                    _deposite.ToAddress = trans.To;
-                                    _deposite.UserId = user.mem_id;
-                                    _deposite.Hash = trans.Hash;
-                                    _deposite.BlockNumber = 0;
-                                    int bNum = 0;
-                                    if (trans.BlockNumber.HexToInt(out bNum))
-                                        _deposite.BlockNumber = bNum;
-                                    _deposite.CreatedAt = (int)CommonHelper.GetUnixTimestamp();
-                                    _deposite.UpdatedAt = (int)CommonHelper.GetUnixTimestamp();
+                                    foreach (var para in paras)
+                                    {
+                                        //Console.WriteLine(para.Parameter.Name + "_" + para.Result.ToString());
+                                        switch (para.Parameter.Name)
+                                        {
+                                            case "_from":
+                                                _fromAddress = para.Result.ToString();
+                                                break;
+                                            case "_to":
+                                                _toAddress = para.Result.ToString();
+                                                break;
+                                            case "_value":
+                                                _value = para.Result.ToString();
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
 
-                                    depositRepoQuery.Insert(_deposite as TDeposit);
 
+                                    var user = userRepository.FindByAddress(_toAddress);
+                                    //  var user = userRepository.FindByAddress("123");
+                                    //  var _sendWallet = wallet.FindWalletByAddressAndNetworkName(toAddress, networkName);
+                                    if (user == null)
+                                    //if(false)
+                                    {
+                                        //logger.Info(to + " is not exist in Wallet!!!");
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        //Console.WriteLine("value" + _trans.value);
+                                        //  if (trans.Value.HexToBigInteger(out var transactionValue))
+                                        {
+                                            // var userID = "";
+
+                                            // if (_sendWallet != null)
+                                            //wallet.UpdateBalanceDeposit(toAddress, EthereumRpc.WeiToEther(transactionValue),
+                                            //  networkName);
+                                            var _deposite = new EthereumTransaction.EthereumDepositTransaction();
+
+                                            _deposite.Id = CommonHelper.GenerateUuid();
+                                            _deposite.FromAddress = _fromAddress;
+                                            _deposite.ToAddress = _toAddress;
+                                            _deposite.UserId = user.mem_id;
+                                            _deposite.Hash = trans.Hash;
+                                            BigInteger amount = 0;
+                                            if (BigInteger.TryParse(_value, out amount))
+                                            {
+                                                _deposite.Amount = EthereumRpc.WeiToEther(amount);
+                                                userRepository.AddBalance(_deposite.UserId, _deposite.Amount);
+                                            }
+                                            int bNum = 0;
+                                            if (trans.BlockNumber.HexToInt(out bNum))
+                                                _deposite.BlockNumber = bNum;
+                                            _deposite.CreatedAt = (int)CommonHelper.GetUnixTimestamp();
+                                            _deposite.UpdatedAt = (int)CommonHelper.GetUnixTimestamp();
+
+                                            depositRepoQuery.Insert(_deposite as TDeposit);
+
+                                        }
+                                    }
+
+                                    //  Console.WriteLine(JsonHelper.SerializeObject(trans));
                                 }
                             }
+
                         }
                     }
                 }
