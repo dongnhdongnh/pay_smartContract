@@ -351,7 +351,7 @@ namespace SmartContract.EthereumBusiness
         {
             string abi = AppSettingHelper.GetSmartContractAbi();
             Nethereum.Contracts.Contract contract = Web3Api.GetContract(abi, AppSettingHelper.GetSmartContractAddress());
-            Function funct = Web3Api.getFunction(contract, "transfer");
+            Function funct = Web3Api.getFunction(contract, "transferFromByOwner");
             return Web3Api.DecodeInput(input, funct);
 
         }
@@ -384,12 +384,12 @@ namespace SmartContract.EthereumBusiness
                 else
                 {
                     //	Console.WriteLine();
-                    EthRpcJson.Getter getter =
-                        JsonHelper.DeserializeObject<EthRpcJson.Getter>(result.Data);
+                    //EthRpcJson.Getter getter =
+                    //    JsonHelper.DeserializeObject<EthRpcJson.Getter>(result.Data);
                     return new ReturnObject
                     {
                         Status = Status.STATUS_COMPLETED,
-                        Data = JsonHelper.SerializeObject(getter.Result)
+                        Data = result.Data
                     };
                 }
             }
