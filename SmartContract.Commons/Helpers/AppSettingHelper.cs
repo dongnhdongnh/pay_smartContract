@@ -63,6 +63,7 @@ namespace SmartContract.Commons.Helpers
         {
             return GetNodeSetting(CryptoCurrency.ETH);
         }
+
         public static string GetSmartContractAbi()
         {
             string contents = File.ReadAllText(@"DN.Abi");
@@ -70,20 +71,25 @@ namespace SmartContract.Commons.Helpers
             contents.Replace("\"", "'");
             return contents;
         }
+
         public static string GetSmartContractAddress()
         {
-
-            return "0x8070F3cba5833490b8794E2b4894b59A45cBbBa8";
+            return Get("Contract:ContractAddress");
         }
+
         public static string GetSmartContractPublicKey()
         {
-
-            return "0xC2A213f481b2C794704218365E13d4761820B398";
+            return Get("Contract:AddressSend");
         }
+
         public static string GetSmartContractPrivateKey()
         {
+            return Get("Contract:ContractPrivate");
+        }
 
-            return "08786bec5c4b2ac8cb6dcafb320a3486d59a0e9f81860792fe13ca0a962cda3e";
+        public static string GetSmartContractInfura()
+        {
+            return Get("Contract:Url");
         }
 
         public static string GetRedisConfig()

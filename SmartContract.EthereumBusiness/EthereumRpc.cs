@@ -274,7 +274,7 @@ namespace SmartContract.EthereumBusiness
                 
                 var account = new Account(AppSettingHelper.GetSmartContractPrivateKey());
 
-                var web3 = new Web3(account, "https://ropsten.infura.io/v3/e2bd8adca45547c38efb10566fa7eec1");
+                var web3 = new Web3(account, AppSettingHelper.GetSmartContractInfura());
                 var txCount = await web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(AppSettingHelper.GetSmartContractPublicKey());
                 var value = (BigInteger)EtherToWei(blockchainTransaction.Amount);
 
