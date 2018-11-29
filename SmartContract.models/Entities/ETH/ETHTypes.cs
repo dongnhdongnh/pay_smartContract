@@ -24,4 +24,19 @@ namespace SmartContract.models.Entities.ETH
         [JsonProperty("input")] public string Input;
         [JsonProperty("nonce")] public string Nonce;
     }
+    
+    public class EthereumTransactionReceipt
+    {
+        [JsonProperty("from")] public string From;
+        [JsonProperty("to")] public string To;
+        [JsonProperty("logsBloom")] public string LogsBloom;
+        [JsonProperty("blockHash")] public string BlockHash;
+        [JsonProperty("blockNumber")] public string BlockNumber;
+        [JsonProperty("contractAddress")] public string ContractAddress;
+        [JsonProperty("transactionIndex")] public string TransactionIndex;
+        [JsonProperty("cumulativeGasUsed")] public string CumulativeGasUsed;
+        [JsonProperty("gasUsed")] public string GasUsed;
+        [JsonProperty("status")] public string Status;
+        [JsonProperty("transactionHash")] public string TransactionHash;
+    }
 }

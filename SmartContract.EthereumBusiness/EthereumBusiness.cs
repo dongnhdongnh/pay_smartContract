@@ -301,6 +301,11 @@ namespace SmartContract.EthereumBusiness
                         foreach (EthereumTransactionResponse trans in block.TransactionsResponse)
                         {
 
+                            var checkHash = rpcClass.CheckTransactionReceipt(trans.Hash);
+                            
+                            if(checkHash.Status == Status.STATUS_ERROR)
+                                continue;
+                            
                             if (trans.To != null)
                             {
                                 if (AppSettingHelper.GetSmartContractAddress().ToLower().Equals(trans.To.ToLower()))

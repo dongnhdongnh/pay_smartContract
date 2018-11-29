@@ -26,6 +26,7 @@ namespace SmartContract.EthereumBusiness
                     _datas[RpcName.EthSendTransaction] = new EthRpcJson.Sender("1", "eth_sendTransaction");
                     _datas[RpcName.EthGetBalance] = new EthRpcJson.Sender("1", "eth_getBalance");
                     _datas[RpcName.EthSendDrawTransaction] = new EthRpcJson.Sender("1", "eth_sendRawTransaction");
+                    _datas[RpcName.EthGetTransactionReceipt] = new EthRpcJson.Sender("1", "eth_getTransactionReceipt");
                 }
 
                 return _datas;
@@ -43,6 +44,7 @@ namespace SmartContract.EthereumBusiness
             PersonalSendTransaction,
             EthGetTransactionByHash,
             EthSendDrawTransaction,
+            EthGetTransactionReceipt,
             EthGetTransactionByBlockNumberAndIndex,
             EthSendTransaction
         }

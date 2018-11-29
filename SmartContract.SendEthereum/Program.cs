@@ -55,7 +55,7 @@ namespace SmartContract.SendEthereum
                     Console.WriteLine("Start Send Ethereum....");
 
                     var rpc = new EthereumRpc(AppSettingHelper.GetEthereumNode());
-
+                    
                     using (var ethereumRepo = repoFactory.GetEthereumWithdrawTransactionRepository(connection))
                     {
                         var resultSend = ethereumBusiness.SendTransactionAsync(ethereumRepo, rpc);
